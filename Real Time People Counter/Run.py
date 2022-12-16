@@ -70,11 +70,6 @@ def run():
 	# initialize the total number of frames processed thus far, along
 	# with the total number of objects that have moved either up or down
 	totalFrames = 0
-	totalDown = 0
-	totalUp = 0
-	x = []
-	empty=[]
-	empty1=[]
 
 	# start the frames per second throughput estimator
 	fps = FPS().start()
@@ -84,6 +79,7 @@ def run():
 
 	# loop over frames from the video stream
 	while True:
+		totalPersonCount = 0
 		# grab the next frame and handle if we are reading from either
 		# VideoCapture or VideoStream
 		frame = vs.read()
@@ -186,13 +182,6 @@ def run():
 				# add the bounding box coordinates to the rectangles list
 				rects.append((startX, startY, endX, endY))
 
-		# draw a horizontal line in the center of the frame -- once an
-		# object crosses this line we will determine whether they were
-		# moving 'up' or 'down'
-		cv2.line(frame, (0, H // 2), (W, H // 2), (0, 0, 0), 3)
-		cv2.putText(frame, "-Prediction border - Entrance-", (10, H - ((i * 20) + 200)),
-			cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
-
 		# use the centroid tracker to associate the (1) old object
 		# centroids with (2) the newly computed object centroids
 		objects = ct.update(rects)
@@ -206,51 +195,15 @@ def run():
 			# if there is no existing trackable object, create one
 			if to is None:
 				to = TrackableObject(objectID, centroid)
-
+				totalPersonCount += 1
 			# otherwise, there is a trackable object so we can utilize it
 			# to determine direction
 			else:
+				totalPersonCount += 1
 				# the difference between the y-coordinate of the *current*
 				# centroid and the mean of *previous* centroids will tell
 				# us in which direction the object is moving (negative for
 				# 'up' and positive for 'down')
-				y = [c[1] for c in to.centroids]
-				direction = centroid[1] - np.mean(y)
-				to.centroids.append(centroid)
-
-				# check to see if the object has been counted or not
-				if not to.counted:
-					# if the direction is negative (indicating the object
-					# is moving up) AND the centroid is above the center
-					# line, count the object
-					if direction < 0 and centroid[1] < H // 2:
-						totalUp += 1
-						empty.append(totalUp)
-						to.counted = True
-
-					# if the direction is positive (indicating the object
-					# is moving down) AND the centroid is below the
-					# center line, count the object
-					elif direction > 0 and centroid[1] > H // 2:
-						totalDown += 1
-						empty1.append(totalDown)
-						#print(empty1[-1])
-						# if the people limit exceeds over threshold, send an email alert
-						if sum(x) >= config.Threshold:
-							cv2.putText(frame, "-ALERT: People limit exceeded-", (10, frame.shape[0] - 80),
-								cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 2)
-							if config.ALERT:
-								print("[INFO] Sending email alert..")
-								Mailer().send(config.MAIL)
-								print("[INFO] Alert sent")
-
-						to.counted = True
-						
-					x = []
-					# compute the sum of total people inside
-					x.append(len(empty1)-len(empty))
-					#print("Total people inside:", x)
-
 
 			# store the trackable object in our dictionary
 			trackableObjects[objectID] = to
@@ -262,30 +215,19 @@ def run():
 				cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 			cv2.circle(frame, (centroid[0], centroid[1]), 4, (255, 255, 255), -1)
 
-		# construct a tuple of information we will be displaying on the
 		info = [
-		("Exit", totalUp),
-		("Enter", totalDown),
-		("Status", status),
+		("Total people inside", totalPersonCount)
 		]
 
-		info2 = [
-		("Total people inside", x),
-		]
-
-                # Display the output
+        # Display the output
 		for (i, (k, v)) in enumerate(info):
-			text = "{}: {}".format(k, v)
-			cv2.putText(frame, text, (10, H - ((i * 20) + 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
-
-		for (i, (k, v)) in enumerate(info2):
 			text = "{}: {}".format(k, v)
 			cv2.putText(frame, text, (265, H - ((i * 20) + 60)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
 		# Initiate a simple log to save data at end of the day
 		if config.Log:
 			datetimee = [datetime.datetime.now()]
-			d = [datetimee, empty1, empty, x]
+			d = [datetimee, totalPersonCount]
 			export_data = zip_longest(*d, fillvalue = '')
 
 			with open('Log.csv', 'w', newline='') as myfile:
