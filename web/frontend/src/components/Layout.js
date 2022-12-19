@@ -8,6 +8,7 @@ export class Layout extends Component {
   render() {
     return (
       <div>
+        <h1 style={{textAlign: 'center'}}>Cyclops</h1>
         <NavMenu />
         <Container tag="main">
           {this.props.children}
