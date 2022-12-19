@@ -17,8 +17,7 @@ import java.util.List;
 @Entity
 public class OccupiedData extends BaseEntity{
     private int tableId;
-    @OneToMany
-    private List<Customer> customerList;
+    private int customerCount;
     @DateTimeFormat(style = "yyyy-MM-dd HH:mm")
     private Long time;
 }

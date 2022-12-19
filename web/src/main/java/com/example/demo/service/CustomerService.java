@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Customer;
 import com.example.demo.entity.MyUserDetails;
 import com.example.demo.entity.OccupiedData;
 import com.example.demo.entity.User;
+import com.example.demo.repository.CustomerRepository;
 import com.example.demo.repository.OccupiedDataRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -17,28 +19,20 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__({@Autowired,@NonNull}))
-public class OccupiedDataService{
+public class CustomerService {
 
-    private final OccupiedDataRepository dataRepository;
+    private final CustomerRepository customerRepository;
 
-    public void deleteData(UUID id) {
-        dataRepository.deleteById(id);
+    public void deleteCustomer(UUID id) {
+        customerRepository.deleteById(id);
     }
 
-    public List<OccupiedData> findAll() {
-        return dataRepository.findAll();
+    public List<Customer> findAll() {
+        return customerRepository.findAll();
     }
 
-    public Optional<OccupiedData> findDataByTime(long time) {
-        return dataRepository.findDataByTime(time);
-    }
-
-    public Optional<OccupiedData> findDataByTableNo(int tableNo) {
-        return dataRepository.findDataByTableId(tableNo);
-    }
-
-    public OccupiedData findDataById(UUID id) {
-        return dataRepository.findDataById(id);
+    public Customer findDataById(UUID id) {
+        return customerRepository.getReferenceById(id);
     }
 
 }

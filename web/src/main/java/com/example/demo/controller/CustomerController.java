@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.OccupiedDataService;
-import com.example.demo.service.UserService;
+import com.example.demo.service.CustomerService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @__({@Autowired,@NonNull}))
-public class OccupiedDataController {
-
-    private final OccupiedDataService occupiedDataService;
+public class CustomerController {
+    private final CustomerService customerService;
 }
