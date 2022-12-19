@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -14,8 +16,9 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @Entity
 public class OccupiedData extends BaseEntity{
-    private int tableNo;
-    private int customerCount;
+    private int tableId;
+    @OneToMany
+    private List<Customer> customerList;
     @DateTimeFormat(style = "yyyy-MM-dd HH:mm")
     private Long time;
 }
