@@ -67,8 +67,7 @@ def run():
 	trackers = []
 	trackableObjects = {}
 
-	# initialize the total number of frames processed thus far, along
-	# with the total number of objects that have moved either up or down
+	# initialize the total number of frames processed thus far
 	totalFrames = 0
 
 	# start the frames per second throughput estimator
@@ -93,7 +92,7 @@ def run():
 		# resize the frame to have a maximum width of 500 pixels (the
 		# less data we have, the faster we can process it), then convert
 		# the frame from BGR to RGB for dlib
-		frame = imutils.resize(frame, width = 500)
+		#frame = imutils.resize(frame, width = 500)
 		rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
 		# if the frame dimensions are empty, set them
@@ -195,16 +194,8 @@ def run():
 			# if there is no existing trackable object, create one
 			if to is None:
 				to = TrackableObject(objectID, centroid)
-				totalPersonCount += 1
-			# otherwise, there is a trackable object so we can utilize it
-			# to determine direction
-			else:
-				totalPersonCount += 1
-				# the difference between the y-coordinate of the *current*
-				# centroid and the mean of *previous* centroids will tell
-				# us in which direction the object is moving (negative for
-				# 'up' and positive for 'down')
 
+			totalPersonCount += 1
 			# store the trackable object in our dictionary
 			trackableObjects[objectID] = to
 
@@ -216,7 +207,7 @@ def run():
 			cv2.circle(frame, (centroid[0], centroid[1]), 4, (255, 255, 255), -1)
 
 		info = [
-		("Total people inside", totalPersonCount)
+		("Total people in the frame", totalPersonCount)
 		]
 
         # Display the output
