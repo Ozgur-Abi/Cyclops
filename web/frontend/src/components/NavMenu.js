@@ -22,7 +22,7 @@ export class NavMenu extends Component {
   render() {
     return (
       <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div class="container-fluid">
           <button
             class="navbar-toggler"
@@ -37,27 +37,26 @@ export class NavMenu extends Component {
           </button>
 
           <div
-            class="collapse navbar-collapse justify-content-center"
-            id="navbarCenteredExample"
-          >
+            class="collapse navbar-collapse navbar-expand-lg"
+            id="navbarCenteredExample" >
             <ul class="navbar-nav mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <li className="nav-item">
+                <a class="navbar-brand nav-link active text-white" aria-current="page" href="#">Cyclops</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/login">Login</a>
+                <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/register">Register</a>
+                <a class="nav-link active text-white" href="/login">Login</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/counter">Counter</a>
+                <a class="nav-link active text-white" href="/register">Register</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/restaurant">Restaurant</a>
+                <a class="nav-link active text-white" href="/restaurant">Restaurant</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/userlist">Customers</a>
+                <a class="nav-link active text-white" href="/userlist">Customers</a>
               </li>
             </ul>
           </div>
