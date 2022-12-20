@@ -23,6 +23,10 @@ const AppRoutes = [
     element: <Register />
   },
   {
+    path: '/counter',
+    element: <Counter />
+  },
+  {
     path: '/restaurant',
     element: <Restaurant />
   },
