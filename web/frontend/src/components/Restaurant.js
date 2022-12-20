@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
+
 const data = [
   {
     name: "9AM - 12AM",
@@ -28,27 +29,26 @@ export class Restaurant extends Component {
   static displayName = Restaurant.name;
 
     state = {
-        testdata: ""
+        countData: []
     };
 
     async componentDidMount() {
-        const response = await fetch('/tabledata/test');
-        const body = await response.json();
-        this.setState({testdata: body["tableNo"]});
-
+        const response = await fetch('/tabledata/gettodaycount');
+        const countArray = await response.json();
+        let cData = [];
+        for(let i = 0; i < 24; i++){
+            cData.push(
+                {
+                    name: i + "-" + (i+1),
+                    Capacity: countArray[i]
+                }
+            )
+        }
+        this.setState({countData: cData});
     }
-
   render() {
-      const {testdata} = this.state;
-
+      const {countData} = this.state;
     return (
-<<<<<<< HEAD
-      <div>
-        <h1>Mr Xi's Canine Delight</h1>
-        <p>Müşteri Sayısı: 19554/22000</p>
-          <p>{testdata}</p>
-        <p>Yoğunluk: 9 köpek/metrekare</p>
-=======
       <div class="container">
         <div class="row">
         <div class="col-6 mr-100" >
@@ -62,7 +62,7 @@ export class Restaurant extends Component {
             <BarChart
               width={700}
               height={500}
-              data={data}
+              data={countData}
               margin={{
                 top: 5,
                 right: 30,
@@ -79,7 +79,6 @@ export class Restaurant extends Component {
             </BarChart>
           </div>
         </div>
->>>>>>> 6d805cfb22ffffa775c1545c4cb6ba193f05ba94
       </div>
     );
   }

@@ -13,7 +13,7 @@ import java.util.UUID;
 @Repository
 @EnableJpaRepositories
 public interface OccupiedDataRepository extends JpaRepository<OccupiedData, UUID> {
-    Optional<OccupiedData> findDataByTableId(int tableNo);
+    List<OccupiedData> findDataByTableId(int tableNo);
     OccupiedData findDataById(UUID id);
-    Optional<OccupiedData> findDataByTime(long time);
+    List<OccupiedData> findDataByTime(long time);
 }

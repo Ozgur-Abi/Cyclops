@@ -21,6 +21,9 @@ public class OccupiedDataService{
 
     private final OccupiedDataRepository dataRepository;
 
+    public void addData(OccupiedData od){
+        dataRepository.save(od);
+    }
     public void deleteData(UUID id) {
         dataRepository.deleteById(id);
     }
@@ -29,16 +32,17 @@ public class OccupiedDataService{
         return dataRepository.findAll();
     }
 
-    public Optional<OccupiedData> findDataByTime(long time) {
+    public List<OccupiedData> findDataByTime(long time) {
         return dataRepository.findDataByTime(time);
     }
 
-    public Optional<OccupiedData> findDataByTableNo(int tableNo) {
+    public List<OccupiedData> findDataByTableNo(int tableNo) {
         return dataRepository.findDataByTableId(tableNo);
     }
 
     public OccupiedData findDataById(UUID id) {
         return dataRepository.findDataById(id);
     }
+
 
 }
