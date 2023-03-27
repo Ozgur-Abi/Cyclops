@@ -1,6 +1,6 @@
 package com.app.repository;
 
-import com.app.entity.Customer;
+
 import com.app.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -12,5 +12,8 @@ import java.util.UUID;
 
 @Repository
 @EnableJpaRepositories
-public interface 0CustomerRepository extends JpaRepository<Customer, UUID> {
+public interface UserRepository extends JpaRepository<User, UUID> {
+    Optional<User> findUserByEmail(String email);
+    User findUserById(UUID id);
+    List<User> findUsersByUsernameContaining(String name);
 }
