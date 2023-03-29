@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Cyclops.iml" filepath="$PROJECT_DIR$/.idea/Cyclops.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/cyclops-web.iml" filepath="$PROJECT_DIR$/web/cyclops-web.iml" />
+    </modules>
+  </component>
+</project>
