@@ -8,11 +8,15 @@ import { Restaurant } from "./components/Restaurant";
 const AppRoutes = [
   {
     index: true,
-    element: <Home />
+    element: <Login />
   },
   {
     path: '/counter',
     element: <Counter />
+  },
+  {
+    path: '/home',
+    element: <Home />
   },
   {
     path: '/login',

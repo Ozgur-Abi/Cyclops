@@ -5,9 +5,9 @@ export class Login extends Component {
 
   render() {
     return (
-        <form>
+        <form >
         <h3>Sign In</h3>
-        <div className="mb-3">
+        <div className="mb-lg-3" class="w-25">
           <label>Email address</label>
           <input
             type="email"
@@ -15,7 +15,7 @@ export class Login extends Component {
             placeholder="Enter email"
           />
         </div>
-        <div className="mb-3">
+        <div className="mb-3" class="w-25">
           <label>Password</label>
           <input
             type="password"
@@ -23,7 +23,7 @@ export class Login extends Component {
             placeholder="Enter password"
           />
         </div>
-        <div className="mb-3">
+        <div >
           <div className="custom-control custom-checkbox">
             <input
               type="checkbox"
@@ -36,12 +36,15 @@ export class Login extends Component {
           </div>
         </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" class="w-25">
             Login
           </button>
         </div>
         <p className="forgot-password text-right">
           Forgot <a href="#">password?</a>
+        </p>
+        <p className="forgot-password text-right">
+            <a href="register">Register</a>
         </p>
       </form>
     );
