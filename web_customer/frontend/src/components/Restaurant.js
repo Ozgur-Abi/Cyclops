@@ -33,18 +33,8 @@ export class Restaurant extends Component {
     };
 
     async componentDidMount() {
-        const response = await fetch('/tabledata/gettodaycount');
-        const countArray = await response.json();
-        let cData = [];
-        for(let i = 0; i < 24; i++){
-            cData.push(
-                {
-                    name: i + "-" + (i+1),
-                    Capacity: countArray[i]
-                }
-            )
-        }
-        this.setState({countData: cData});
+        const response = await fetch('/res/asdasd');
+        console.log(response.text);
     }
   render() {
       const {countData} = this.state;

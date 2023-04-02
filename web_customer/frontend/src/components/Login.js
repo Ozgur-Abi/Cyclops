@@ -3,14 +3,35 @@ import React, { Component } from 'react';
 export class Login extends Component {
   static displayName = Login.name;
 
+    constructor() {
+
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+
+        fetch('/perform_login', {
+            method: 'POST',
+            body: data,
+        }).then(async function (response) {
+            let text = await response.text();
+            console.log(response.json())
+           console.log(text)
+        });
+    }
+
   render() {
     return (
-        <form>
+        <form onSubmit={this.handleSubmit}>
         <h3>Sign In</h3>
         <div className="mb-3">
           <label>Email address</label>
           <input
             type="email"
+            id="email"
+            name="email"
             className="form-control"
             placeholder="Enter email"
           />
@@ -19,6 +40,8 @@ export class Login extends Component {
           <label>Password</label>
           <input
             type="password"
+            id="password"
+            name="password"
             className="form-control"
             placeholder="Enter password"
           />
