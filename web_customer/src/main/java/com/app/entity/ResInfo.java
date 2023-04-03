@@ -5,8 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @EqualsAndHashCode()
 @Data
@@ -15,6 +14,8 @@ import javax.persistence.Id;
 @Entity
 public class ResInfo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     private int restaurantNo;
     private String restaurantName;
     private int currentCustomerCount;

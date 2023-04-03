@@ -16,8 +16,12 @@ public class ResInfoService {
 
     private final ResInfoRepository resInfoRepository;
 
+
     public List<ResInfo> getOpenRes(){
         return resInfoRepository.findAllByOpen(true);
+    }
+    public ResInfo getResInfo(int id){
+        return resInfoRepository.findDataByRestaurantNo(id);
     }
 
 }

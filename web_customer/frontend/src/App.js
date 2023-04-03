@@ -8,7 +8,7 @@ import { Home } from "./components/Home";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { UserList } from "./components/UserList";
-import { Restaurant } from "./components/Restaurant";
+import Restaurant from "./components/Restaurant";
 
 
 export default class App extends Component {
@@ -36,7 +36,7 @@ export default class App extends Component {
                     <Route path="/UserList" element={<UserList />} />
                 </Route>
                 <Route element={<Layout/>}>
-                    <Route path="/Restaurant" element={<Restaurant />} />
+                    <Route path="/Restaurant/:resId" element={<Restaurant />} />
                 </Route>
             </Routes>
     );

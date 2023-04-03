@@ -1,74 +1,40 @@
 import React, { Component } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useParams } from 'react-router-dom';
+import { withRouter } from "react-router";
+import { useState } from "react";
+
+export default function Restaurant() {
+
+    const [res, setRes] = useState({});
+
+    let params = useParams();
+    fetch('/res/' + params.resId, {
+        method: 'GET',
+    }).then(res => res.json()).then(data => {
+        //this.setState(data);
+        if (data.open == true)
+            data.openText = "Restaurant is currently open"
+        else
+            data.openText = "Restaurant is closed"
+        setRes(data);
+        console.log(data);
+    });
 
 
-
-const data = [
-  {
-    name: "9AM - 12AM",
-    Capacity: 21,
-  },
-  {
-    name: "12AM - 3PM",
-    Capacity: 19,
-  },
-  {
-    name: "3PM - 6PM",
-    Capacity: 45,
-  },
-  {
-    name: "6PM - 9PM",
-    Capacity: 37,
-  },
-  {
-    name: "9PM - 12PM",
-    Capacity: 16,
-  }
-];
-export class Restaurant extends Component {
-  static displayName = Restaurant.name;
-
-    state = {
-        countData: []
-    };
-
-    async componentDidMount() {
-
-    }
-  render() {
-      const {countData} = this.state;
     return (
-      <div class="container">
-        <div class="row">
-        <div class="col-6 mr-100" >
-            <h2 style={{textAlign:'center'}}>Customer Count</h2>
-            <h5 style={{textAlign:'center'}}>There are 37
-            customers in the restaurant right now.
-            </h5>
-            <p style={{textAlign:'center'}}>The restaurants maximum capacity is: 52 customers.</p>
-          </div>
-          <div class="col-6 m-100">
-            <BarChart
-              width={700}
-              height={500}
-              data={countData}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="Capacity" fill="#82ca9d" />
-            </BarChart>
-          </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 mr-100">
+                    <h2 style={{textAlign: 'center'}}>{res.restaurantName}</h2>
+                    <h5 style={{textAlign: 'center'}}>There are {res.currentCustomerCount} customers in the restaurant right now.
+                    </h5>
+                    <p style={{textAlign: 'center'}}>{res.openText}</p>
+                    <p style={{textAlign: 'center'}}>Address: {res.address}</p>
+                    <p style={{textAlign: 'center'}}>Contact: {res.telephone}</p>
+                </div>
+
+            </div>
         </div>
-      </div>
     );
-  }
 }

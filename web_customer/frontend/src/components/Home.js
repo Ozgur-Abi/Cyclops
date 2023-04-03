@@ -3,29 +3,32 @@ import React, { Component } from 'react';
 export class Home extends Component {
   static displayName = Home.name;
 
-
+    state = {
+        restaurantList: []
+    };
 
   async componentWillMount() {
       const response = await fetch('/getEmail');
       if (await response.url == "http://localhost:8080/login")
           window.location.href = 'http://localhost:3000/login'
-
   }
+
+    async componentDidMount() {
+        const response = await fetch('/res/all');
+        const resArray = await response.json();
+        console.log(resArray);
+        this.setState({restaurantList: resArray});
+    }
   render() {
+      const {restaurantList} = this.state;
     return (
       <div>
-        <h3 style={{textAlign: 'center'}}>Welcome to Cyclops Web Client!</h3>
-        <p style={{textAlign: 'center'}}>Please choose the restaurant you would like to manage from below:</p>
-        <ul class="text-center">
-          <button type="submit" className="btn btn-primary">
-            Jankat's Place
-          </button>
-          <button type="submit" className="btn btn-primary">
-            Osman's Place
-          </button>
-          <button type="submit" className="btn btn-primary">
-            Kaan's Place
-          </button>
+        <h3 style={{textAlign: 'center'}}>Welcome to Cyclops!</h3>
+        <p style={{textAlign: 'center'}}>Please choose the restaurant you would like to see details of:</p>
+        <ul>
+            {restaurantList.map(restaurant => (
+                <li> <a href = {"http://localhost:3000/restaurant/" + restaurant.restaurantNo}>{restaurant.restaurantNo + ": " + restaurant.restaurantName}</a></li>
+            ))}
         </ul>
       </div>
     );

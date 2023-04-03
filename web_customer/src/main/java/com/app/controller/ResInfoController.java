@@ -3,6 +3,7 @@ package com.app.controller;
 import com.app.entity.MyUserDetails;
 import com.app.entity.ResInfo;
 import com.app.entity.User;
+import com.app.repository.ResInfoRepository;
 import com.app.service.ResInfoService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,14 +23,29 @@ import java.util.List;
 public class ResInfoController {
 
     private final ResInfoService rInfoService;
+    private final ResInfoRepository rInfoRepo;
 
     @GetMapping("/all")
-    public ResponseEntity asdasd() {
+    public ResponseEntity getAllOpen() {
         List<ResInfo> resInfos = rInfoService.getOpenRes();
-
-
-
         return new ResponseEntity(resInfos, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity getResInfo(@PathVariable("id") int resId) {
+        ResInfo resInfo = rInfoService.getResInfo(resId);
+        return new ResponseEntity(resInfo, HttpStatus.OK);
+    }
+
+    @PostMapping("/createRandom")
+    public void createRandom(){
+        ResInfo resInfo = new ResInfo();
+        resInfo.setAddress("Bahçelievler, Ayçiçeği Sk. No:2, 34688 Üsküdar/İstanbul");
+        resInfo.setTelephone("05313313131");
+        resInfo.setRestaurantName("Dolak Restaurant");
+        resInfo.setCurrentCustomerCount(31);
+        resInfo.setOpen(true);
+        rInfoRepo.save(resInfo);
     }
 
 }
