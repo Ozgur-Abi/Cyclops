@@ -5,10 +5,21 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux';
+import reducer from './reducer'
+import './index.css';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
+
+const store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 root.render(
   <BrowserRouter basename={baseUrl}>

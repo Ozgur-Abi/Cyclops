@@ -18,4 +18,8 @@ public class ResInfo {
     private int restaurantNo;
     private String restaurantName;
     private int currentCustomerCount;
+    private boolean open;
+    private String address;
+    private String telephone;
+
 }

@@ -47,12 +47,6 @@ export class NavMenu extends Component {
                 <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active text-white" href="/login">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active text-white" href="/register">Register</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link active text-white" href="/restaurant">Restaurant</a>
               </li>
               <li class="nav-item">

@@ -4,21 +4,26 @@ export class Login extends Component {
   static displayName = Login.name;
 
     constructor() {
-
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(event) {
         event.preventDefault();
         const data = new FormData(event.target);
-
         fetch('/perform_login', {
             method: 'POST',
             body: data,
         }).then(async function (response) {
-            let text = await response.text();
-            console.log(response.json())
-           console.log(text)
+            console.log(await response)
+            if (response.url == "http://localhost:8080/login"){
+                window.location.href = 'http://localhost:3000/home'
+
+            }
+
+            else{
+                //show error message
+            }
+
         });
     }
 

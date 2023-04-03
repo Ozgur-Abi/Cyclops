@@ -13,4 +13,5 @@ import java.util.UUID;
 @EnableJpaRepositories
 public interface ResInfoRepository extends JpaRepository<ResInfo, UUID> {
     ResInfo findDataByRestaurantNo(int id);
+    List<ResInfo> findAllByOpen(boolean open);
 }

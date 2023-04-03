@@ -33,8 +33,7 @@ export class Restaurant extends Component {
     };
 
     async componentDidMount() {
-        const response = await fetch('/res/asdasd');
-        console.log(response.text);
+
     }
   render() {
       const {countData} = this.state;

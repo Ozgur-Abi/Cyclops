@@ -1,5 +1,6 @@
 package com.app.controller;
 
+import com.app.entity.MyUserDetails;
 import com.app.entity.User;
 
 import com.app.service.UserService;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,9 +42,18 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login() {
-        return "login";
+    @GetMapping("/getEmail")
+    @ResponseBody
+    public String getEmail() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication.isAuthenticated()){
+            MyUserDetails ud = ((MyUserDetails)authentication.getPrincipal());
+            return ud.getEmail();
+        }
+        else{
+            return "notAuthenticated";
+        }
     }
 
     @PostMapping(value = "/register")
