@@ -12,5 +12,5 @@ import java.util.UUID;
 
 @Repository
 @EnableJpaRepositories
-public interface 0CustomerRepository extends JpaRepository<Customer, UUID> {
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 }

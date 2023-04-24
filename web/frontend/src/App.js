@@ -8,23 +8,26 @@ import { Home } from "./components/Home";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { UserList } from "./components/UserList";
-import { Restaurant } from "./components/Restaurant";
-
+import { Restaurant}  from "./components/Restaurant";
+import { OrderList } from "./components/OrderList";
 
 export default class App extends Component {
-  static displayName = App.name;
+    static displayName = App.name;
 
-  render() {
-    return (
+    render() {
+        return (
             <Routes>
                 <Route >
-                    <Route path="/" element={<Login />} />
+                    <Route path="/Login" element={<Login />} />
                 </Route>
                 <Route element={<Layout/>}>
                     <Route path="/Counter" element={<Counter />} />
                 </Route>
                 <Route element={<Layout/>}>
-                    <Route path="/Home" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
+                </Route>
+                <Route element={<Layout/>}>
+                    <Route path="/" element={<Home />} />
                 </Route>
                 <Route element={<Layout/>}>
                     <Route path="/Register" element={<Register />} />
@@ -35,7 +38,10 @@ export default class App extends Component {
                 <Route element={<Layout/>}>
                     <Route path="/Restaurant" element={<Restaurant />} />
                 </Route>
+                <Route element={<Layout/>}>
+                    <Route path="/OrderList" element={<OrderList />} />
+                </Route>
             </Routes>
-    );
-  }
+        );
+    }
 }

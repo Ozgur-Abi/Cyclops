@@ -22,7 +22,7 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    public void deleteCustomer(UUID id) {
+    public void deleteCustomer(int id) {
         customerRepository.deleteById(id);
     }
 
@@ -30,8 +30,8 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    /*public Customer findDataById(UUID id) {
-        return customerRepository.getReferenceById(id);
-    }*/
+    public Customer findDataById(int id) {
+        return customerRepository.getById(id);
+    }
 
 }

@@ -58,6 +58,9 @@ export class NavMenu extends Component {
               <li class="nav-item">
                 <a class="nav-link active text-white" href="/userlist">Customers</a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link active text-white" href="/orderlist">Orders</a>
+              </li>
             </ul>
           </div>
         </div>

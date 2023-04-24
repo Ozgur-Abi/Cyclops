@@ -23,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
@@ -32,8 +33,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests().antMatchers("/").permitAll().and().csrf().disable();
+    public void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+        httpSecurity
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/register")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginProcessingUrl("/perform_login")
+                .permitAll()
+                .defaultSuccessUrl("/", true)
+                .passwordParameter("password")
+                .usernameParameter("email")
+                .failureUrl("/login-error")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                //.logoutRequestMatcher(new AntPathRequestMatcher("logout", "GET"))
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .logoutSuccessUrl("/login");
     }
 
 

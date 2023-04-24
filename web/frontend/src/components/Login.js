@@ -1,52 +1,76 @@
 import React, { Component } from 'react';
 
 export class Login extends Component {
-  static displayName = Login.name;
+    static displayName = Login.name;
 
-  render() {
-    return (
-        <form >
-        <h3>Sign In</h3>
-        <div className="mb-lg-3" class="w-25">
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Enter email"
-          />
-        </div>
-        <div className="mb-3" class="w-25">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Enter password"
-          />
-        </div>
-        <div >
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="customCheck1"
-            />
-            <label className="custom-control-label" htmlFor="customCheck1">
-              Remember me
-            </label>
-          </div>
-        </div>
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary" class="w-25">
-            Login
-          </button>
-        </div>
-        <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
-        </p>
-        <p className="forgot-password text-right">
-            <a href="register">Register</a>
-        </p>
-      </form>
-    );
-  }
+    constructor() {
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        fetch('/perform_login', {
+            method: 'POST',
+            body: data,
+        }).then(async function (response) {
+            console.log(await response)
+            if (response.url == "http://localhost:8080/login"){
+                window.location.href = 'http://localhost:3000/home'
+            }
+
+            else{
+                //show error message
+            }
+
+        });
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <h3>Sign In</h3>
+                <div className="mb-3">
+                    <label>Email address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        className="form-control"
+                        placeholder="Enter email"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        className="form-control"
+                        placeholder="Enter password"
+                    />
+                </div>
+                <div className="mb-3">
+                    <div className="custom-control custom-checkbox">
+                        <input
+                            type="checkbox"
+                            className="custom-control-input"
+                            id="customCheck1"
+                        />
+                        <label className="custom-control-label" htmlFor="customCheck1">
+                            Remember me
+                        </label>
+                    </div>
+                </div>
+                <div className="d-grid">
+                    <button type="submit" className="btn btn-primary">
+                        Login
+                    </button>
+                </div>
+                <p className="forgot-password text-right">
+                    Forgot <a href="#">password?</a>
+                </p>
+            </form>
+        );
+    }
 }

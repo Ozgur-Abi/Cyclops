@@ -3,12 +3,13 @@ import { Home } from "./components/Home";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { UserList } from "./components/UserList";
-import { Restaurant } from "./components/Restaurant";
+import { Restaurant} from "./components/Restaurant";
+import { OrderList } from "./components/OrderList";
 
 const AppRoutes = [
   {
     index: true,
-    element: <Login />
+    element: <Home />
   },
   {
     path: '/counter',
@@ -37,8 +38,12 @@ const AppRoutes = [
   {
     path: '/userlist',
     element: <UserList />
+  },
+  {
+    path: '/orderlist',
+    element: <OrderList />
   }
-  
+
 ];
 
 export default AppRoutes;

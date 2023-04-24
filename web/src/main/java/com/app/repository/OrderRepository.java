@@ -1,17 +1,13 @@
 package com.app.repository;
 
-import com.app.entity.Customer;
-import com.app.entity.FoodData;
-import com.app.entity.User;
+import com.app.entity.FoodOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 @EnableJpaRepositories
-public interface FoodDataRepository extends JpaRepository<FoodData, UUID> {
+public interface OrderRepository extends JpaRepository<FoodOrder, Integer> {
 }
