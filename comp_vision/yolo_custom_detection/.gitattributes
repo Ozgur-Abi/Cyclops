@@ -1,0 +1,2 @@
+yolov3_training_last.weights filter=lfs diff=lfs merge=lfs -text
+restaurant[[:space:]]footage.mp4 filter=lfs diff=lfs merge=lfs -text
