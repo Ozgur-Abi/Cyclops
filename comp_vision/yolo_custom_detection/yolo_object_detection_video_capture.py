@@ -1,8 +1,7 @@
 import cv2
 import numpy as np
-import glob
-import random
-
+import pymysql
+import datetime
 
 # Load Yolo
 net = cv2.dnn.readNet("yolov3_training_last.weights", "yolov3_testing.cfg")
@@ -11,8 +10,17 @@ net = cv2.dnn.readNet("yolov3_training_last.weights", "yolov3_testing.cfg")
 classes = ["head"]
 
 # video path
-video_path = r"C:\Users\OSMAN SERHAT YILMAZ\Desktop\project frames and model\restaurant footage.mp4"
+video_path = "restaurant footage.mp4"
 
+# Database connection
+conn = pymysql.connect(
+    host='db-mysql-fra1-20737-do-user-12533753-0.b.db.ondigitalocean.com',
+    port=25060,
+    user='doadmin',
+    password='AVNS_TyP_aTfi4c5egU12ZLl',
+    db='cyclops',
+    cursorclass=pymysql.cursors.DictCursor
+)
 
 layer_names = net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
@@ -25,7 +33,7 @@ cap = cv2.VideoCapture(video_path)
 if not cap.isOpened():
     print("Error opening video stream or file")
 
-counter = 0
+frame_counter = 0
 hourly_people_count = np.array([])
 # loop through all the images
 while cap.isOpened():
@@ -69,16 +77,31 @@ while cap.isOpened():
     indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
     #print(indexes)
 
-    if counter % 3600 == 0:
+    if frame_counter % 3600 == 0:
         hourly_people_count = np.append(hourly_people_count, np.array([len(indexes)]))
 
-    counter += 1
+    frame_counter += 1
 
-    if counter == 3600 * 60:
+    if frame_counter == 3600 * 60:
         average_hourly_ppl_count = np.average(hourly_people_count)
         print(average_hourly_ppl_count)
         #SAVE average_hourly_ppl_count TO DATABASE
-        counter = 0
+        try:
+            with conn.cursor() as cursor:
+                # Create a new record
+                day_and_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                sql = "INSERT INTO customer_count (customer_count, date) VALUES (%s, %s)"
+                record = ((int(average_hourly_ppl_count)), day_and_time)
+                cursor.execute(sql, record)
+
+                # Commit changes
+                conn.commit()
+
+                print("Record inserted successfully")
+        except(RuntimeError):
+            print("Insertion failed.")
+
+        frame_counter = 0
         hourly_people_count = np.array()
 
     font = cv2.FONT_HERSHEY_PLAIN
@@ -95,3 +118,4 @@ while cap.isOpened():
     #key = cv2.waitKey(0)
 
 cv2.destroyAllWindows()
+conn.close()
