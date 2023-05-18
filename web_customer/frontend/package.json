@@ -1,9 +1,10 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-    "options": {
-    "allowedHosts": ["localhost", ".localhost"],
-    "proxy": "https://localhost:8080/"
+  "proxy": "http://localhost:8080/",
+  "options": {
+    "allowedHosts": ["localhost", ".localhost", "http://localhost:8080/"],
+    "proxy": "http://localhost:8080/"
   },
   "private": true,
   "dependencies": {
