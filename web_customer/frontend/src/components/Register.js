@@ -14,7 +14,7 @@ export class Register extends Component {
         event.preventDefault();
         const data = new FormData(event.target);
 
-         fetch('/register', {
+         fetch('/api/register', {
             method: 'POST',
             body: data,
         }).then(async function (response) {

@@ -8,13 +8,13 @@ export class Home extends Component {
     };
 
   async componentWillMount() {
-      const response = await fetch('/getEmail');
+      const response = await fetch('/api/getEmail');
       if (await response.url == "http://localhost:8080/login")
           window.location.href = 'http://localhost:3000/login'
   }
 
     async componentDidMount() {
-        const response = await fetch('/res/all');
+        const response = await fetch('/api/res/all');
         const resArray = await response.json();
         console.log(resArray);
         this.setState({restaurantList: resArray});

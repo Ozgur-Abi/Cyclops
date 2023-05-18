@@ -9,7 +9,7 @@ export default function Restaurant() {
     const [res, setRes] = useState({});
 
     let params = useParams();
-    fetch('/res/' + params.resId, {
+    fetch('/api/res/' + params.resId, {
         method: 'GET',
     }).then(res => res.json()).then(data => {
         //this.setState(data);
