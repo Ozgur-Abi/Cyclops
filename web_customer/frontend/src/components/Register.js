@@ -21,7 +21,7 @@ export class Register extends Component {
             let text = await response.text();
 
             if (text == "success") {
-                window.location.href = 'http://localhost:3000/'
+                window.location.href = '/'
             }
             else if (text == "emailExists"){
                 //add error message

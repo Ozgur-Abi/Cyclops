@@ -16,7 +16,7 @@ export class Login extends Component {
         }).then(async function (response) {
             console.log(await response)
             if (response.url == "http://localhost:8080/login"){
-                window.location.href = 'http://localhost:3000/home'
+                window.location.href = '/home'
             }
 
             else{

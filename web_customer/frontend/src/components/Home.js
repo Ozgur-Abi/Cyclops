@@ -10,7 +10,7 @@ export class Home extends Component {
   async componentWillMount() {
       const response = await fetch('/api/getEmail');
       if (await response.url == "http://localhost:8080/login")
-          window.location.href = 'http://localhost:3000/login'
+          window.location.href = '/login'
   }
 
     async componentDidMount() {
@@ -27,7 +27,7 @@ export class Home extends Component {
         <p style={{textAlign: 'center'}}>Please choose the restaurant you would like to see details of:</p>
         <ul>
             {restaurantList.map(restaurant => (
-                <li> <a href = {"http://localhost:3000/restaurant/" + restaurant.restaurantNo}>{restaurant.restaurantNo + ": " + restaurant.restaurantName}</a></li>
+                <li> <a href = {"/restaurant/" + restaurant.restaurantNo}>{restaurant.restaurantNo + ": " + restaurant.restaurantName}</a></li>
             ))}
         </ul>
       </div>
