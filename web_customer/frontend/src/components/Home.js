@@ -9,7 +9,7 @@ export class Home extends Component {
 
   async componentWillMount() {
       const response = await fetch('/api/getEmail');
-      if (await response.url.includes("/login"))
+      if (await response.url.toString().includes("/login"))
           window.location.href = '/login'
   }
 
