@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Button, Card, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
-import {CardBody} from "reactstrap";
+import {faEye} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export class Register extends Component {
-
 
     static displayName = Register.name;
     constructor() {
@@ -40,7 +40,10 @@ export class Register extends Component {
                         <Card class="px-4">
                             <Card.Body>
                                 <div className="mb-3 mt-md-4">
-                                    <h2 className="fw-bold my-3 text-center">
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <FontAwesomeIcon icon={faEye} className="fa-4x "/>
+                                    </div>
+                                    <h2 className="fw-bold mb-2 text-center ">
                                         CYCLOPS
                                     </h2>
                                     <div className="mb-3" >
