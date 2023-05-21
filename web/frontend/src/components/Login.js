@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {Card, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Button from "react-bootstrap/Button";
 
 export class Login extends Component {
     static displayName = Login.name;
@@ -28,49 +31,57 @@ export class Login extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <h3>Sign In</h3>
-                <div className="mb-3">
-                    <label>Email address</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        className="form-control"
-                        placeholder="Enter email"
-                    />
-                </div>
-                <div className="mb-3">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        className="form-control"
-                        placeholder="Enter password"
-                    />
-                </div>
-                <div className="mb-3">
-                    <div className="custom-control custom-checkbox">
-                        <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="customCheck1"
-                        />
-                        <label className="custom-control-label" htmlFor="customCheck1">
-                            Remember me
-                        </label>
-                    </div>
-                </div>
-                <div className="d-grid">
-                    <button type="submit" className="btn btn-primary">
-                        Login
-                    </button>
-                </div>
-                <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
-                </p>
-            </form>
+            <Container>
+                <Row className="vh-100 d-flex justify-content-center align-items-center">
+                    <Col md={8} lg={6} xs={12}>
+                        <Card class="px-4">
+                            <Card.Body>
+                                <div className="mb-3 mt-md-4">
+                                    <FontAwesomeIcon icon="fa-solid faEye" style={{color: "#000000",}} />
+                                    <h2 className="fw-bold mb-2 text-center text-uppercase ">
+                                        CYCLOPS
+                                    </h2>
+                                    <div className="mb-3" >
+                                        <Form onSubmit={this.handleSubmit}>
+                                            <Form.Label>Email</Form.Label>
+                                            <InputGroup className="mb-3">
+                                                <Form.Control
+                                                    type="email"
+                                                    id="email"
+                                                    name="email"
+                                                    placeholder="Enter email"
+                                                />
+                                            </InputGroup>
+                                            <Form.Label>Password</Form.Label>
+                                            <InputGroup className="mb-3">
+                                                <Form.Control
+                                                    type="password"
+                                                    id="password"
+                                                    name="password"
+                                                    placeholder="Enter password"
+                                                />
+                                            </InputGroup>
+                                            <div className="mb-3">
+                                                <Form.Check
+                                                    id={'customCheck1'}
+                                                    label={'Remember me'}
+                                                />
+                                            </div>
+                                            <Col>
+                                                <Button type="submit">Login</Button>
+                                            </Col>
+                                            <Col>
+                                                <Form.Label className="justify-content-right">Don't have an account?</Form.Label>
+                                                <Button href="/register" className="pull-right">Register</Button>
+                                            </Col>
+                                        </Form>
+                                    </div>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }
