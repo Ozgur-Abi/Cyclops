@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {Card, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Button from "react-bootstrap/Button";
+import {Button, Card, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
+
 
 export class Login extends Component {
     static displayName = Login.name;
@@ -37,8 +36,7 @@ export class Login extends Component {
                         <Card class="px-4">
                             <Card.Body>
                                 <div className="mb-3 mt-md-4">
-                                    <FontAwesomeIcon icon="fa-solid faEye" style={{color: "#000000",}} />
-                                    <h2 className="fw-bold mb-2 text-center text-uppercase ">
+                                    <h2 className="fw-bold mb-2 text-center">
                                         CYCLOPS
                                     </h2>
                                     <div className="mb-3" >
@@ -71,8 +69,8 @@ export class Login extends Component {
                                                 <Button type="submit">Login</Button>
                                             </Col>
                                             <Col>
-                                                <Form.Label className="justify-content-right">Don't have an account?</Form.Label>
-                                                <Button href="/register" className="pull-right">Register</Button>
+                                                <Form.Label className="justify-content-end my-md-3">Don't have an account?</Form.Label>
+                                                <Button href="/register" className="justify-content-lg-end mx-md-3">Register</Button>
                                             </Col>
                                         </Form>
                                     </div>
