@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {Button, Card, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
+import {CardBody} from "reactstrap";
 
 export class Register extends Component {
 
@@ -32,51 +34,69 @@ export class Register extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <h3>Sign Up</h3>
-                <div className="mb-3">
-                    <label>Name</label>
-                    <input
-                        id = "username"
-                        name = "username"
-                        className="form-control"
-                        placeholder="Enter your username"
-                    />
-                </div>
-                <div className="mb-3">
-                    <label>Email address</label>
-                    <input
-                        id = "email"
-                        name = "email"
-                        type="email"
-                        className="form-control"
-                        placeholder="Enter your email"
-                    />
-                </div>
-                <div className="mb-3">
-                    <label>Password</label>
-                    <input
-                        id = "password"
-                        name = "password"
-                        type="password"
-                        className="form-control"
-                        placeholder="Enter your password"
-                    />
-                </div>
-                <div className="mb-3">
-                    <label>Re-type password</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        placeholder="Enter your password"
-                    />
-                </div>
-                <div className="d-grid">
-                    <button type="submit" className="btn btn-primary">
-                        Register
-                    </button>
-                </div>
-            </form>
+            <Container>
+                <Row className="vh-100 d-flex justify-content-center align-items-center">
+                    <Col md={8} lg={6} xs={12}>
+                        <Card class="px-4">
+                            <Card.Body>
+                                <div className="mb-3 mt-md-4">
+                                    <h2 className="fw-bold my-3 text-center">
+                                        CYCLOPS
+                                    </h2>
+                                    <div className="mb-3" >
+                                        <Form onSubmit={this.handleSubmit}>
+
+                                            <Form.Label>Username</Form.Label>
+                                            <InputGroup className="mb-3">
+                                                <Form.Control
+                                                    type="username"
+                                                    id="username"
+                                                    name="username"
+                                                    placeholder="Enter username"
+                                                />
+                                            </InputGroup>
+
+                                            <Form.Label>Email</Form.Label>
+                                            <InputGroup className="mb-3">
+                                                <Form.Control
+                                                    type="email"
+                                                    id="email"
+                                                    name="email"
+                                                    placeholder="Enter email"
+                                                />
+                                            </InputGroup>
+
+                                            <Form.Label>Password</Form.Label>
+                                            <InputGroup className="mb-3">
+                                                <Form.Control
+                                                    type="password"
+                                                    id="password"
+                                                    name="password"
+                                                    placeholder="Enter password"
+                                                />
+                                            </InputGroup>
+
+                                            <Form.Label>Re-type Password</Form.Label>
+                                            <InputGroup className="mb-3">
+                                                <Form.Control
+                                                    type="password"
+                                                    id="password"
+                                                    name="password"
+                                                    placeholder="Re-type password"
+                                                />
+                                            </InputGroup>
+
+                                            <Col>
+                                                <Button type="submit">Register</Button>
+                                            </Col>
+                                        </Form>
+                                    </div>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }

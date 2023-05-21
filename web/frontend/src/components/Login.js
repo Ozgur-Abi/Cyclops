@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Card, Col, Container, Form, InputGroup, Row, Nav} from "react-bootstrap";
+
+import {Button, Card, Col, Container, Form, InputGroup, Row, Nav} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from '@fortawesome/free-solid-svg-icons'
-import Button from "react-bootstrap/Button";
 
 export class Login extends Component {
     static displayName = Login.name;
@@ -38,10 +38,11 @@ export class Login extends Component {
                         <Card class="px-4">
                             <Card.Body>
                                 <div className="mb-3 mt-md-4">
+
                                     <div className="d-flex justify-content-center align-items-center">
                                         <FontAwesomeIcon icon={faEye} className="fa-4x "/>
                                     </div>
-                                    <h2 className="fw-bold mb-2 text-center text-uppercase ">
+                                    <h2 className="fw-bold mb-2 text-center ">
                                         CYCLOPS
                                     </h2>
                                     <div className="mb-3" >
@@ -72,10 +73,12 @@ export class Login extends Component {
                                             </div>
                                             <div className="d-flex justify-content-center align-items-center">
                                                 <Button type="submit">Login</Button>
+
                                             </div>
                                             <div className="d-flex justify-content-center align-items-center">
                                                 <a href="/register">Don't have an account?</a>
                                             </div>
+
                                         </Form>
                                     </div>
                                 </div>
