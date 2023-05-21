@@ -90,7 +90,7 @@ export class Register extends Component {
                                             </InputGroup>
 
                                             <Col>
-                                                <Button type="submit">Register</Button>
+                                                <Button type="submit" className="mt-3">Register</Button>
                                             </Col>
                                         </Form>
                                     </div>
