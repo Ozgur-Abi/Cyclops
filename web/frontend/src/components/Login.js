@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Card, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
+import {Card, Col, Container, Form, InputGroup, Row, Nav} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye} from '@fortawesome/free-solid-svg-icons'
 import Button from "react-bootstrap/Button";
 
 export class Login extends Component {
@@ -37,7 +38,9 @@ export class Login extends Component {
                         <Card class="px-4">
                             <Card.Body>
                                 <div className="mb-3 mt-md-4">
-                                    <FontAwesomeIcon icon="fa-solid faEye" style={{color: "#000000",}} />
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <FontAwesomeIcon icon={faEye} className="fa-4x "/>
+                                    </div>
                                     <h2 className="fw-bold mb-2 text-center text-uppercase ">
                                         CYCLOPS
                                     </h2>
@@ -67,13 +70,12 @@ export class Login extends Component {
                                                     label={'Remember me'}
                                                 />
                                             </div>
-                                            <Col>
+                                            <div className="d-flex justify-content-center align-items-center">
                                                 <Button type="submit">Login</Button>
-                                            </Col>
-                                            <Col>
-                                                <Form.Label className="justify-content-right">Don't have an account?</Form.Label>
-                                                <Button href="/register" className="pull-right">Register</Button>
-                                            </Col>
+                                            </div>
+                                            <div className="d-flex justify-content-center align-items-center">
+                                                <a href="/register">Don't have an account?</a>
+                                            </div>
                                         </Form>
                                     </div>
                                 </div>
