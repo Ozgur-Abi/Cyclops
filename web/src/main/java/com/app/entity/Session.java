@@ -16,12 +16,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode()
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Session extends BaseEntity{
+public class Session{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customerId", updatable = false, nullable = false)
+    private int id;
 
     @OneToMany
     private Set<Customer> customerList;

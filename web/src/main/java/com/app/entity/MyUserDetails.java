@@ -13,11 +13,11 @@ public class MyUserDetails implements UserDetails {
     private String password;
     private String username;
     private Role role;
-    private UUID uuid;
+    private int id;
 
     //add role
     public MyUserDetails(User user) {
-        this.uuid = user.getId();
+        this.id = user.getId();
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.username = user.getUsername();
@@ -49,7 +49,7 @@ public class MyUserDetails implements UserDetails {
 
     public Role getRole(){return role;}
 
-    public UUID getUUID(){return uuid;}
+    public int getId(){return id;}
 
     @Override
     public boolean isAccountNonExpired() {
