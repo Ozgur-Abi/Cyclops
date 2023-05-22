@@ -26,50 +26,31 @@ export class UserList extends Component {
     this.setState({customerList: customerArray});
   }
 
-    getColumnsForRow =()=>{
-        let items = this.customerList.map((customer, index) => {
-            return (
-                <Col>
-                    <Card key={customer.id}>
-                        <Card.Body>
-                            <Card.Title>Customer #({index} + 1)</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">Name: {customer.name}</Card.Subtitle>
-                            <Card.Subtitle className="mb-2 text-muted">Surname: {customer.surname}</Card.Subtitle>
-                            <Card.Subtitle className="mb-2 text-muted">Sex: {customer.sex}</Card.Subtitle>
-                            <Card.Subtitle className="mb-2 text-muted">Age: {customer.age}</Card.Subtitle>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            );
-        });
-        return items;
-    };
+
 
   render() {
-    //const {customerList} = this.state;
+    const {customerList} = this.state;
     return (
-        <Container>
-            <Row md={this.columnsPerRow}>
-                {this.getColumnsForRow()}
+        <div>
+            <h3 style={{textAlign: 'center'}}>Customer List</h3>
+            <Row xs={1} md={3} className="g-4">
+                {customerList.map((customer,index) => (
+                    <ListGroup horizontal>
+                        <ListGroup.Item>
+                            <Card style={{ width: '18rem' }}>
+                                <Card.Body>
+                                    <Card.Title>Customer #{index + 1}</Card.Title>
+                                    <Card.Subtitle>Name: {customer.name}</Card.Subtitle>
+                                    <Card.Subtitle>Surname: {customer.surname}</Card.Subtitle>
+                                    <Card.Subtitle>Sex: {customer.sex}</Card.Subtitle>
+                                    <Card.Subtitle>Age: {customer.age}</Card.Subtitle>
+                                </Card.Body>
+                            </Card>
+                        </ListGroup.Item>
+                    </ListGroup>
+                ))}
             </Row>
-        </Container>
-
-        /**  <ul>
-            {customerList.map((customer,index) => (
-                <Card style={{ width: '18rem' }}>
-                  <Card.Body>
-                    <Card.Title>Customer #{index + 1}</Card.Title>
-                  </Card.Body>
-                  <ListGroup className="list-group-flush">
-                    <ListGroup.Item>Name: {customer.name}</ListGroup.Item>
-                    <ListGroup.Item>Surname: {customer.surname}</ListGroup.Item>
-                    <ListGroup.Item>Sex: {customer.sex}</ListGroup.Item>
-                    <ListGroup.Item>Age: {customer.age}</ListGroup.Item>
-                  </ListGroup>
-                </Card>
-            ))}
-
-          </ul>*/
+        </div>
     );
   }
 }
