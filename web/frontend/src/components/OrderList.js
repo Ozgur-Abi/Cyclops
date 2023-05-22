@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
@@ -28,6 +29,7 @@ export class OrderList extends Component {
     return (
         <div>
           <h3 style={{textAlign: 'center'}}>Order List</h3>
+          <Row xs={1} md={3} className="g-4">
             {orderList.map((order,index) => (
                 <ListGroup horizontal>
                   <ListGroup.Item>
@@ -43,6 +45,7 @@ export class OrderList extends Component {
                   </ListGroup.Item>
                 </ListGroup>
             ))}
+            </Row>
         </div>
     );
   }
