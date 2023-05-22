@@ -3,10 +3,20 @@ import numpy as np
 import cv2
 from PIL import Image
 import PIL
+import pymysql
 
 global startID
 startID = 2
 dircnt = 0
+
+conn = pymysql.connect(
+    host='db-mysql-fra1-20737-do-user-12533753-0.b.db.ondigitalocean.com',
+    port=25060,
+    user='doadmin',
+    password='AVNS_TyP_aTfi4c5egU12ZLl',
+    db='cyclops',
+    cursorclass=pymysql.cursors.DictCursor
+)
 
 for b, d, f in os.walk('training-data'):
     for di in d:
@@ -129,7 +139,22 @@ def predict(test_img):
         print("saving image to:", path)
         cv2.imwrite(path, img)
 
-        return
+        try:
+            with conn.cursor() as cursor:
+                # Create a new record
+                sql = "INSERT INTO customer (customer_id, age, in_res, name, sex, surname) VALUES (%s, %s, %s, %s, %s, %s)"
+                record = (startID, -1, 1, "", "", "")
+                cursor.execute(sql, record)
+
+                # Commit changes
+                conn.commit()
+
+                print("new customer saved successfully")
+
+        except(RuntimeError):
+            print("Customer cannot be saved")
+
+        return None, startID
 
     label_text = subjects[label]
 
@@ -173,7 +198,7 @@ for dir_name in dirs:
 
 print("Predicting images...")
 
-video_path = r"test-data/ihsan_entering_1.mp4"
+video_path = r"test-data/ihsan_entering_3.mp4"
 face_image = capture_face_frame(video_path)
 
 if face_image is not None:
@@ -196,10 +221,18 @@ if predicted_img1 is not None:
     cv2.destroyAllWindows()
 
 try:
-    #!!! SEND id to backend
-    print("Info sent to database")
+    with conn.cursor() as cursor:
+        sql = "UPDATE customer SET in_res = %s WHERE customer_id = %s"
+        record = (1, id)
+        cursor.execute(sql, record)
 
-except RuntimeError:
-    print("Insertion failed.")
+        # Commit changes
+        conn.commit()
 
+        print("Update done successfully.")
+
+except(RuntimeError):
+    print("Update failed.")
+
+conn.close()
 print("end")
