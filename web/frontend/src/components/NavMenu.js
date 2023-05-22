@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Button, Nav, Navbar} from "react-bootstrap";
+import {Button, Container, Nav, Navbar} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons";
+import ".//NavMenu.css"
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -23,29 +24,25 @@ export class NavMenu extends Component {
 
   render() {
     return (
-      <header>
-        <Navbar bg="dark" expand="lg">
-          <div class="container-fluid">
-            <Nav className="fa-beat">
-              <Nav.Item className="d-flex align-items-center justify-content-center">
-                <FontAwesomeIcon icon={faEye} style={{color: "#ffffff",}} className="fa-2x" />
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/restaurant" className="text-white">Home</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/userlist" className="text-white">Customers</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/orderlist" className="text-white">Orders</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/logout" className="text-white">Logout</Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </div>
+        <Navbar bg="dark">
+          <Nav className="justify-content-start">
+            <Nav.Item className="d-flex align-items-center justify-content-center mx-3" >
+              <FontAwesomeIcon icon={faEye} style={{color: "#ffffff",}} className="fa-2x" />
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/home" className="text-white mx-3">Home</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/userlist" className="text-white mx-3">Customers</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/orderlist" className="text-white mx-3">Orders</Nav.Link>
+            </Nav.Item>
+          </Nav>
+          <Nav className="ms-auto">
+            <Nav.Link href="/logout" className="text-white mx-3">Logout</Nav.Link>
+          </Nav>
       </Navbar>
-    </header>
     );
   }
 }

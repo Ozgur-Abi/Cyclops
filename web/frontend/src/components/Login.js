@@ -37,7 +37,6 @@ export class Login extends Component {
                         <Card class="px-4">
                             <Card.Body>
                                 <div className="mb-3 mt-md-4">
-
                                     <div className="d-flex justify-content-center align-items-center">
                                         <FontAwesomeIcon icon={faEye} className="fa-4x "/>
                                     </div>
@@ -64,12 +63,6 @@ export class Login extends Component {
                                                     placeholder="Enter password"
                                                 />
                                             </InputGroup>
-                                            <div className="mb-3">
-                                                <Form.Check
-                                                    id={'customCheck1'}
-                                                    label={'Remember me'}
-                                                />
-                                            </div>
                                             <div className="d-flex justify-content-center align-items-center">
                                                 <Button type="submit">Login</Button>
 

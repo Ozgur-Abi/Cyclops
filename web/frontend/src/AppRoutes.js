@@ -3,7 +3,6 @@ import { Home } from "./components/Home";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { UserList } from "./components/UserList";
-import { Restaurant} from "./components/Restaurant";
 import { OrderList } from "./components/OrderList";
 
 const AppRoutes = [
@@ -30,10 +29,6 @@ const AppRoutes = [
   {
     path: '/counter',
     element: <Counter />
-  },
-  {
-    path: '/restaurant',
-    element: <Restaurant />
   },
   {
     path: '/userlist',

@@ -28,8 +28,27 @@ export class OrderList extends Component {
     return (
         <div>
           <h3 style={{textAlign: 'center'}}>Order List</h3>
-          <ul>
             {orderList.map((order,index) => (
+                <ListGroup horizontal>
+                  <ListGroup.Item>
+                    <Card style={{ width: '18rem' }}>
+                      <Card.Body>
+                        <Card.Title>Order #{index + 1}</Card.Title>
+                        <Card.Subtitle>Order ID: {order.id}</Card.Subtitle>
+                        <Card.Subtitle>Customer: {order.customer.name + " " + order.customer.surname}</Card.Subtitle>
+                        <Card.Subtitle>Table ID: {order.tableId}</Card.Subtitle>
+                        <Card.Subtitle>Order: {order.orderText}</Card.Subtitle>
+                      </Card.Body>
+                    </Card>
+                  </ListGroup.Item>
+                </ListGroup>
+            ))}
+        </div>
+    );
+  }
+}
+
+                /**
                 <Card style={{ width: '18rem' }}>
                   <Card.Body>
                     <Card.Title>Order #{index + 1}</Card.Title>
@@ -41,10 +60,4 @@ export class OrderList extends Component {
                     <ListGroup.Item>Order: {order.orderText}</ListGroup.Item>
                   </ListGroup>
                 </Card>
-            ))}
-
-          </ul>
-        </div>
-    );
-  }
-}
+                 */

@@ -92,7 +92,6 @@ export class Register extends Component {
                                                 <Button  type="submit">Register</Button>
                                                 <a className="mx-4" href="/login">Return to Login</a>
                                             </div>
-
                                         </Form>
                                     </div>
                                 </div>

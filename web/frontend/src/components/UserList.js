@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
+import {Col, Container, Row} from "react-bootstrap";
 
 export class UserList extends Component {
   static displayName = UserList.name;
+
+  columnsPerRow = 4;
 
   state = {
     customerList: []
@@ -20,17 +23,38 @@ export class UserList extends Component {
     const response = await fetch('/customer/all');
     const customerArray = await response.json();
     console.log(customerArray);
-    //customerArray.push({name: "Ali",surname:"Babacan",sex:"Mail",age:31})
     this.setState({customerList: customerArray});
   }
 
+    getColumnsForRow =()=>{
+        let items = this.customerList.map((customer, index) => {
+            return (
+                <Col>
+                    <Card key={customer.id}>
+                        <Card.Body>
+                            <Card.Title>Customer #({index} + 1)</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">Name: {customer.name}</Card.Subtitle>
+                            <Card.Subtitle className="mb-2 text-muted">Surname: {customer.surname}</Card.Subtitle>
+                            <Card.Subtitle className="mb-2 text-muted">Sex: {customer.sex}</Card.Subtitle>
+                            <Card.Subtitle className="mb-2 text-muted">Age: {customer.age}</Card.Subtitle>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            );
+        });
+        return items;
+    };
+
   render() {
-    const {customerList} = this.state;
+    //const {customerList} = this.state;
     return (
-        <div>
-          <h3 style={{textAlign: 'center'}}>Welcome to Cyclops!</h3>
-          <p style={{textAlign: 'center'}}>Please choose the user you would like to learn intimate secrets and personal knowledge of :</p>
-          <ul>
+        <Container>
+            <Row md={this.columnsPerRow}>
+                {this.getColumnsForRow()}
+            </Row>
+        </Container>
+
+        /**  <ul>
             {customerList.map((customer,index) => (
                 <Card style={{ width: '18rem' }}>
                   <Card.Body>
@@ -45,8 +69,7 @@ export class UserList extends Component {
                 </Card>
             ))}
 
-          </ul>
-        </div>
+          </ul>*/
     );
   }
 }
