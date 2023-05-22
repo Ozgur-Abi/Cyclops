@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import pymysql
 import datetime
+import sys
 
 # Load Yolo
 net = cv2.dnn.readNet("yolov3_training_last.weights", "yolov3_testing.cfg")
@@ -13,14 +14,14 @@ classes = ["head"]
 video_path = "restaurant footage.mp4"
 
 # Database connection
-conn = pymysql.connect(
-    host='db-mysql-fra1-20737-do-user-12533753-0.b.db.ondigitalocean.com',
-    port=25060,
-    user='doadmin',
-    password='AVNS_TyP_aTfi4c5egU12ZLl',
-    db='cyclops',
-    cursorclass=pymysql.cursors.DictCursor
-)
+#conn = pymysql.connect(
+#    host='db-mysql-fra1-20737-do-user-12533753-0.b.db.ondigitalocean.com',
+#    port=25060,
+#    user='doadmin',
+#    password='AVNS_TyP_aTfi4c5egU12ZLl',
+#    db='cyclops',
+#    cursorclass=pymysql.cursors.DictCursor
+#)
 
 layer_names = net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
@@ -42,6 +43,11 @@ while cap.isOpened():
     ret, img = cap.read()
     img = cv2.resize(img, None, fx=0.4, fy=0.4)
     height, width, channels = img.shape
+
+    mask = np.zeros((height, width), dtype=np.uint8)
+    mask[:, width//2:] = 255
+
+    img = cv2.bitwise_and(img, img, mask=mask)
 
     # Detecting objects
     blob = cv2.dnn.blobFromImage(img, 0.00392, (416, 416), (0, 0, 0), True, crop=False)
@@ -77,32 +83,33 @@ while cap.isOpened():
     indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
     #print(indexes)
 
-    if frame_counter % 3600 == 0:
+    if frame_counter % 1 == 0:
         hourly_people_count = np.append(hourly_people_count, np.array([len(indexes)]))
+        #!!! SEND len(indexes) to backend
 
     frame_counter += 1
 
-    if frame_counter == 3600 * 60:
-        average_hourly_ppl_count = np.average(hourly_people_count)
+    if frame_counter == 6:
+        average_hourly_ppl_count = int(np.average(hourly_people_count))
         print(average_hourly_ppl_count)
         #SAVE average_hourly_ppl_count TO DATABASE
         try:
-            with conn.cursor() as cursor:
+            #with conn.cursor() as cursor:
                 # Create a new record
-                day_and_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                sql = "INSERT INTO customer_count (customer_count, date) VALUES (%s, %s)"
-                record = ((int(average_hourly_ppl_count)), day_and_time)
-                cursor.execute(sql, record)
+            #    day_and_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            #    sql = "INSERT INTO customer_count (customer_count, date) VALUES (%s, %s)"
+            #    record = ((int(average_hourly_ppl_count)), day_and_time)
+            #    cursor.execute(sql, record)
 
                 # Commit changes
-                conn.commit()
+            #    conn.commit()
 
                 print("Record inserted successfully")
         except(RuntimeError):
             print("Insertion failed.")
 
         frame_counter = 0
-        hourly_people_count = np.array()
+        hourly_people_count = np.array([])
 
     font = cv2.FONT_HERSHEY_PLAIN
     for i in range(len(boxes)):
@@ -114,8 +121,5 @@ while cap.isOpened():
             #cv2.putText(img, label, (x, y + 30), font, 3, color, 2)
 
 
-    #cv2.imshow("Image", img)
-    #key = cv2.waitKey(0)
-
 cv2.destroyAllWindows()
-conn.close()
+#conn.close()
