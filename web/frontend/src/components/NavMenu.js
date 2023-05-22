@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import './NavMenu.css';
+import {Button, Container, Nav, Navbar} from "react-bootstrap";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye} from "@fortawesome/free-solid-svg-icons";
+import ".//NavMenu.css"
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -21,51 +24,25 @@ export class NavMenu extends Component {
 
   render() {
     return (
-      <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <div class="container-fluid">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-mdb-toggle="collapse"
-            data-mdb-target="#navbarCenteredExample"
-            aria-controls="navbarCenteredExample"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i class="fas fa-bars"></i>
-          </button>
-
-          <div
-            class="collapse navbar-collapse navbar-expand-lg"
-            id="navbarCenteredExample" >
-            <ul class="navbar-nav mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a class="navbar-brand nav-link active text-white" aria-current="page" href="#">Cyclops</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active text-white" href="/">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active text-white" href="/register">Register</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active text-white" href="/restaurant">Restaurant</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active text-white" href="/userlist">Customers</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active text-white" href="/orderlist">Orders</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+        <Navbar bg="dark">
+          <Nav className="justify-content-start">
+            <Nav.Item className="d-flex align-items-center justify-content-center mx-3" >
+              <FontAwesomeIcon icon={faEye} style={{color: "#ffffff",}} className="fa-2x" />
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/home" className="text-white mx-3">Home</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/userlist" className="text-white mx-3">Customers</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/orderlist" className="text-white mx-3">Orders</Nav.Link>
+            </Nav.Item>
+          </Nav>
+          <Nav className="ms-auto">
+            <Nav.Link href="/logout" className="text-white mx-3">Logout</Nav.Link>
+          </Nav>
+      </Navbar>
     );
   }
 }

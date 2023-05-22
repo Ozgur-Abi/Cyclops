@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import {Col, Container, Row} from "react-bootstrap";
 import ListGroup from 'react-bootstrap/ListGroup';
 
 export class UserList extends Component {
   static displayName = UserList.name;
+
+  columnsPerRow = 4;
 
   state = {
     customerList: []
@@ -20,32 +22,33 @@ export class UserList extends Component {
     const response = await fetch('/customer/all');
     const customerArray = await response.json();
     console.log(customerArray);
-    //customerArray.push({name: "Ali",surname:"Babacan",sex:"Mail",age:31})
     this.setState({customerList: customerArray});
   }
+
+
 
   render() {
     const {customerList} = this.state;
     return (
         <div>
-          <h3 style={{textAlign: 'center'}}>Welcome to Cyclops!</h3>
-          <p style={{textAlign: 'center'}}>Please choose the user you would like to learn intimate secrets and personal knowledge of :</p>
-          <ul>
-            {customerList.map((customer,index) => (
-                <Card style={{ width: '18rem' }}>
-                  <Card.Body>
-                    <Card.Title>Customer #{index + 1}</Card.Title>
-                  </Card.Body>
-                  <ListGroup className="list-group-flush">
-                    <ListGroup.Item>Name: {customer.name}</ListGroup.Item>
-                    <ListGroup.Item>Surname: {customer.surname}</ListGroup.Item>
-                    <ListGroup.Item>Sex: {customer.sex}</ListGroup.Item>
-                    <ListGroup.Item>Age: {customer.age}</ListGroup.Item>
-                  </ListGroup>
-                </Card>
-            ))}
-
-          </ul>
+            <h3 style={{textAlign: 'center'}}>Customer List</h3>
+            <Row xs={1} md={3} className="g-4">
+                {customerList.map((customer,index) => (
+                    <ListGroup horizontal>
+                        <ListGroup.Item>
+                            <Card style={{ width: '18rem' }}>
+                                <Card.Body>
+                                    <Card.Title>Customer #{index + 1}</Card.Title>
+                                    <Card.Subtitle>Name: {customer.name}</Card.Subtitle>
+                                    <Card.Subtitle>Surname: {customer.surname}</Card.Subtitle>
+                                    <Card.Subtitle>Sex: {customer.sex}</Card.Subtitle>
+                                    <Card.Subtitle>Age: {customer.age}</Card.Subtitle>
+                                </Card.Body>
+                            </Card>
+                        </ListGroup.Item>
+                    </ListGroup>
+                ))}
+            </Row>
         </div>
     );
   }

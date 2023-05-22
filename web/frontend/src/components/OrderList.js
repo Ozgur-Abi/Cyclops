@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
+import {Container} from "react-bootstrap";
 
 export class OrderList extends Component {
   static displayName = OrderList.name;
@@ -27,23 +28,25 @@ export class OrderList extends Component {
     const {orderList} = this.state;
     return (
         <div>
-          <h3 style={{textAlign: 'center'}}>Order List</h3>
-          <ul>
-            {orderList.map((order,index) => (
-                <Card style={{ width: '18rem' }}>
-                  <Card.Body>
-                    <Card.Title>Order #{index + 1}</Card.Title>
-                  </Card.Body>
-                  <ListGroup className="list-group-flush">
-                    <ListGroup.Item>Order ID: {order.id}</ListGroup.Item>
-                    <ListGroup.Item>Customer: {order.customer.name + " " + order.customer.surname}</ListGroup.Item>
-                    <ListGroup.Item>Table ID: {order.tableId}</ListGroup.Item>
-                    <ListGroup.Item>Order: {order.orderText}</ListGroup.Item>
+          <h2 className="mt-md-5 d-flex justify-content-center text-decoration-underline" style={{fontSize:30}}> Today's Orders</h2>
+          <Container>
+            <Row xs={1} md={4} className="g-4 mt-md-1">
+              {orderList.map((order,index) => (
+                  <ListGroup horizontal>
+                    <ListGroup.Item>
+                      <Card style={{ width: '18rem' }} >
+                        <Card.Body >
+                          <Card.Title>Order ID: {order.id}</Card.Title>
+                          <Card.Subtitle>Customer: {order.customer.name + " " + order.customer.surname}</Card.Subtitle>
+                          <Card.Subtitle>Table ID: {order.tableId}</Card.Subtitle>
+                          <Card.Subtitle>Order: {order.orderText}</Card.Subtitle>
+                        </Card.Body>
+                      </Card>
+                    </ListGroup.Item>
                   </ListGroup>
-                </Card>
-            ))}
-
-          </ul>
+              ))}
+            </Row>
+          </Container>
         </div>
     );
   }

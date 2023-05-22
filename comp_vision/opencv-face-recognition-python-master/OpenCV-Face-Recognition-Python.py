@@ -2,9 +2,6 @@ import os
 
 import cv2
 import numpy as np
-
-subjects = ["", "Osman Serhat Yılmaz", "Elvis Presley"]
-
 import cv2
 
 def capture_face_frame(video_path):
@@ -117,6 +114,7 @@ face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 #train our face recognizer of our training faces
 face_recognizer.train(faces, np.array(labels))
 
+subjects = ["", "Osman Serhat Yılmaz", "Elvis Presley"]
 def draw_rectangle(img, rect):
     (x, y, w, h) = rect
     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
