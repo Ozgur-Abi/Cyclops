@@ -13,7 +13,7 @@ export class UserList extends Component {
   };
 
   async componentWillMount() {
-    const response = await fetch('/getEmail');
+    const response = await fetch('/api/getEmail');
     if (await response.url == "http://localhost:8080/login")
       window.location.href = 'http://localhost:3000/login'
   }

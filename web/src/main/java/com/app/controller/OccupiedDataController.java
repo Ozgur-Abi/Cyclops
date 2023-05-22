@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @RestController
 @RequestMapping("/tabledata")
@@ -65,22 +62,32 @@ public class OccupiedDataController {
 
     @GetMapping(value = "/gettodaycount", produces = "application/json")
     public ResponseEntity getTodayCountData(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         LocalDateTime now = LocalDateTime.now();
         List<Integer> counts = new ArrayList<Integer>();
-        Random rand = new Random();
-        int randInt = rand.nextInt(10);
-        System.out.println(randInt);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
 
         for(int i = 0; i < 24; i++){
-            int hourCount = 0;
-            LocalDateTime finalTime = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), i, 0);
-            long timeLong = Long.parseLong(dtf.format(finalTime));
-            for(OccupiedData od: occupiedDataService.findDataByTime(timeLong)){
-                hourCount += od.getCustomerCount();
-            }
-            counts.add(hourCount);
+            counts.add(0);
         }
+
+        for(OccupiedData od: occupiedDataService.findAll()){
+
+            if (od.getId() != -1){
+                LocalDateTime d = LocalDateTime.parse(od.getDataTime().toString(), formatter);
+                System.out.println("text");
+                System.out.println(od.getDataTime());
+                System.out.println(d.getHour());
+
+                LocalDateTime finalTime = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), 0);
+                if (d.getDayOfMonth() == finalTime.getDayOfMonth() && d.getMonthValue() == finalTime.getMonthValue() && d.getYear() == finalTime.getYear()){
+                    int hour = d.getHour();
+                    counts.set(hour-1, counts.get(hour) + 1);
+                }
+            }
+
+        }
+
+
 
         return new ResponseEntity(counts, HttpStatus.OK);
     }
@@ -95,7 +102,7 @@ public class OccupiedDataController {
 
         System.out.println(dtf.format(now));
 
-        data.setTime(Long.parseLong(dtf.format(now)));
+        data.setDataTime(Long.parseLong(dtf.format(now)));
         occupiedDataService.addData(data);
 
         return new ResponseEntity(data, HttpStatus.OK);
@@ -116,7 +123,7 @@ public class OccupiedDataController {
                 OccupiedData data = new OccupiedData();
                 data.setTableId(j);
                 data.setCustomerCount(count);
-                data.setTime(Long.parseLong(dtf.format(finalTime)));
+                data.setDataTime(Long.parseLong(dtf.format(finalTime)));
                 occupiedDataService.addData(data);
             }
         }

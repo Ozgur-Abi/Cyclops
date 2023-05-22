@@ -13,7 +13,7 @@ export class Login extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const data = new FormData(event.target);
-        fetch('/perform_login', {
+        fetch('/api/perform_login', {
             method: 'POST',
             body: data,
         }).then(async function (response) {

@@ -18,10 +18,10 @@ import java.util.List;
 public class OccupiedData{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customerId", updatable = false, nullable = false)
+    @Column(name = "dataId", updatable = false, nullable = false)
     private int id;
     private int tableId;
     private int customerCount;
     @DateTimeFormat(style = "yyyyMMddHHmm")
-    private Long time;
+    private Long dataTime;
 }

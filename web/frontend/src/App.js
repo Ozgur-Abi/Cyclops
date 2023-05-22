@@ -28,8 +28,8 @@ export default class App extends Component {
                 <Route element={<Layout/>}>
                     <Route path="/home" element={<Home />} />
                 </Route>
-                <Route >
-                    <Route path="/" element={<Login />} />
+                <Route element={<Layout/>}>
+                    <Route path="/" element={<Home />} />
                 </Route>
                 <Route element={<Layout/>}>
                     <Route path="/UserList" element={<UserList />} />

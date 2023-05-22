@@ -30,7 +30,7 @@ public class OccupiedDataService{
     }
 
     public List<OccupiedData> findDataByTime(long time) {
-        return dataRepository.findDataByTime(time);
+        return dataRepository.findDataByDataTime(time);
     }
 
     public List<OccupiedData> findDataByTableNo(int tableNo) {

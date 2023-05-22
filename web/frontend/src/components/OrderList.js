@@ -12,13 +12,13 @@ export class OrderList extends Component {
   };
 
   async componentWillMount() {
-    const response = await fetch('/getEmail');
+    const response = await fetch('/api/getEmail');
     if (await response.url == "http://localhost:8080/login")
       window.location.href = 'http://localhost:3000/login'
   }
 
   async componentDidMount() {
-    const response = await fetch('/order/all');
+    const response = await fetch('/api/order/all');
     const orderArray = await response.json();
     this.setState({orderList: orderArray});
   }

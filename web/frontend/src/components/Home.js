@@ -17,6 +17,8 @@ const DateSelector = () => {
     );
 };
 
+
+
 const data = [
     {
         name: "9AM - 12AM",
@@ -44,13 +46,27 @@ export class Home extends Component {
     static displayName = Home.name;
 
     state = {
-        countData: []
+        countData: [],
+		currentCount: 0,
+		maxCount: 0
     };
+	
+	async componentWillMount() {
+		const response = await fetch('/api/getEmail');
+		if (await response.url == "http://localhost:8080/login")
+		  window.location.href = 'http://localhost:3000/login'
+	}
 
     async componentDidMount() {
-        const response = await fetch('/tabledata/gettodaycount');
+        const response = await fetch('/api/tabledata/gettodaycount');
+		const response2 = await fetch('/api/tabledata/totalnow');
         const countArray = await response.json();
+		const curData = await response2.json();
         let cData = [];
+		
+		
+		
+		
         for(let i = 0; i < 24; i++){
             cData.push(
                 {
@@ -59,20 +75,19 @@ export class Home extends Component {
                 }
             )
         }
-        this.setState({countData: cData});
+        this.setState({countData: cData, currentCount: curData.customerCount, maxCount: curData.tableId * -1});
     }
     render() {
-        const {countData} = this.state;
+        const {countData, currentCount, maxCount} = this.state;
         return (
             <Container>
                 <Row>
                     <Col>
                         <div>
                             <h2 style={{textAlign:'center'}}>Customer Count</h2>
-                            <h5 style={{textAlign:'center'}}>There are 37
-                                customers in the restaurant right now.
+                            <h5 style={{textAlign:'center'}}>There are {currentCount} customers in the restaurant right now.
                             </h5>
-                            <p style={{textAlign:'center'}}>The restaurants maximum capacity is: 52 customers.</p>
+                            <p style={{textAlign:'center'}}>The restaurants maximum capacity is: {maxCount} customers.</p>
                         </div>
                         <div className="d-flex justify-content-center <- doesn't work">
                             <DatePicker locale="en"/>
