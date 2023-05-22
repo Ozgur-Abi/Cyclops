@@ -31,8 +31,9 @@ export class UserList extends Component {
     const {customerList} = this.state;
     return (
         <div>
-            <h3 style={{textAlign: 'center'}}>Customer List</h3>
-            <Row xs={1} md={3} className="g-4">
+          <h2 className="mt-md-5 d-flex justify-content-center text-decoration-underline" style={{fontSize:30}}> Today's Customers</h2>
+          <Container>
+            <Row xs={1} md={4} className="g-4 mt-md-1">
                 {customerList.map((customer,index) => (
                     <ListGroup horizontal>
                         <ListGroup.Item>
@@ -49,6 +50,7 @@ export class UserList extends Component {
                     </ListGroup>
                 ))}
             </Row>
+          </Container>
         </div>
     );
   }
