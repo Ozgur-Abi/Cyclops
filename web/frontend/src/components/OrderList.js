@@ -20,7 +20,6 @@ export class OrderList extends Component {
   async componentDidMount() {
     const response = await fetch('/order/all');
     const orderArray = await response.json();
-    console.log(orderArray);
     this.setState({orderList: orderArray});
   }
 

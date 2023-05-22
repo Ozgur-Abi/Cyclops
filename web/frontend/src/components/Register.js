@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {Button, Card, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
+import {Alert, Button, Card, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
 import {faEye} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -8,11 +7,18 @@ export class Register extends Component {
 
     static displayName = Register.name;
     constructor() {
-
         super();
+        this.state = {emailStatus : false};
+        this.updateState = this.updateState.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    updateState(){
+        this.setState({emailStatus: true})
+        console.log(this.state)
+    }
     handleSubmit(event) {
+        const self = this;
         event.preventDefault();
         const data = new FormData(event.target);
 
@@ -22,17 +28,21 @@ export class Register extends Component {
         }).then(async function (response) {
             let text = await response.text();
 
-            if (text == "success") {
+            if (text === "success") {
                 window.location.href = 'http://localhost:3000/'
             }
-            else if (text == "emailExists"){
-                //add error message
+            else if (text === "emailExists"){
+                self.updateState();
             }
-        });
+        })
     }
 
-
     render() {
+        let emailAlert;
+        if(this.emailStatus) {
+            emailAlert=<Alert emailInUse={this.emailStatus}>That email is in use.</Alert>
+            //this.setState({emailInUse: false});
+        }
         return (
             <Container>
                 <Row className="vh-100 d-flex justify-content-center align-items-center">
@@ -87,7 +97,6 @@ export class Register extends Component {
                                                     placeholder="Re-type password"
                                                 />
                                             </InputGroup>
-
                                             <div className="d-flex justify-content-center align-items-center mt-4">
                                                 <Button  type="submit">Register</Button>
                                                 <a className="mx-4" href="/login">Return to Login</a>
@@ -97,6 +106,7 @@ export class Register extends Component {
                                 </div>
                             </Card.Body>
                         </Card>
+                        {emailAlert}
                     </Col>
                 </Row>
             </Container>
