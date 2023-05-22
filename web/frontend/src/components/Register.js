@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Button, Card, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
-import {CardBody} from "reactstrap";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye} from "@fortawesome/free-solid-svg-icons";
 
 export class Register extends Component {
 
@@ -40,7 +41,10 @@ export class Register extends Component {
                         <Card class="px-4">
                             <Card.Body>
                                 <div className="mb-3 mt-md-4">
-                                    <h2 className="fw-bold my-3 text-center">
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <FontAwesomeIcon icon={faEye} className="fa-4x "/>
+                                    </div>
+                                    <h2 className="fw-bold mb-2 text-center ">
                                         CYCLOPS
                                     </h2>
                                     <div className="mb-3" >
@@ -86,9 +90,11 @@ export class Register extends Component {
                                                 />
                                             </InputGroup>
 
-                                            <Col>
-                                                <Button type="submit">Register</Button>
-                                            </Col>
+                                            <div className="d-flex justify-content-center align-items-center mt-4">
+                                                <Button  type="submit">Register</Button>
+                                                <a className="mx-4" href="/login">Return to Login</a>
+                                            </div>
+
                                         </Form>
                                     </div>
                                 </div>
