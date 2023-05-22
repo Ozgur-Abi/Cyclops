@@ -25,7 +25,7 @@ export default function Restaurant() {
     return (
         <div class="container">
             <div class="row">
-                <div class="col-6 mr-100">
+                <div class="col-12 mr-100 my-5">
                     <h2 style={{textAlign: 'center'}}>{res.restaurantName}</h2>
                     <h5 style={{textAlign: 'center'}}>There are {res.currentCustomerCount} customers in the restaurant right now.
                     </h5>

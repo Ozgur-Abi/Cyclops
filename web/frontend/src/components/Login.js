@@ -68,7 +68,7 @@ export class Login extends Component {
 
                                             </div>
                                             <div className="d-flex justify-content-center align-items-center">
-                                                <a href="/register">Don't have an account?</a>
+                                                <a className="mt-3" href="/register">Don't have an account?</a>
                                             </div>
                                         </Form>
                                     </div>

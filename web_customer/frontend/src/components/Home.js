@@ -23,7 +23,7 @@ export class Home extends Component {
       const {restaurantList} = this.state;
     return (
       <div>
-        <h3 style={{textAlign: 'center'}}>Welcome to Cyclops!</h3>
+        <h3 style={{textAlign: 'center'}} className="mt-3">Welcome to Cyclops!</h3>
         <p style={{textAlign: 'center'}}>Please choose the restaurant you would like to see details of:</p>
         <ul>
             {restaurantList.map(restaurant => (

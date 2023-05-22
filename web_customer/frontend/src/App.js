@@ -17,7 +17,7 @@ export default class App extends Component {
   render() {
     return (
             <Routes>
-                <Route >
+                <Route>
                     <Route path="/Login" element={<Login />} />
                 </Route>
                 <Route element={<Layout/>}>
@@ -29,7 +29,7 @@ export default class App extends Component {
                 <Route element={<Layout/>}>
                     <Route path="/" element={<Home />} />
                 </Route>
-                <Route element={<Layout/>}>
+                <Route>
                     <Route path="/Register" element={<Register />} />
                 </Route>
                 <Route element={<Layout/>}>
