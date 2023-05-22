@@ -41,7 +41,7 @@ export class Register extends Component {
                             <Card.Body>
                                 <div className="mb-3 mt-md-4">
                                     <div className="d-flex justify-content-center align-items-center">
-                                        <FontAwesomeIcon icon={faEye} className="fa-4x"/>
+                                        <FontAwesomeIcon icon={faEye} className="fa-4x "/>
                                     </div>
                                     <h2 className="fw-bold mb-2 text-center ">
                                         CYCLOPS
@@ -88,9 +88,11 @@ export class Register extends Component {
                                                 />
                                             </InputGroup>
 
-                                            <Col>
-                                                <Button type="submit" className="mt-3">Register</Button>
-                                            </Col>
+                                            <div className="d-flex justify-content-center align-items-center mt-4">
+                                                <Button  type="submit">Register</Button>
+                                                <a className="mx-4" href="/login">Return to Login</a>
+                                            </div>
+
                                         </Form>
                                     </div>
                                 </div>
