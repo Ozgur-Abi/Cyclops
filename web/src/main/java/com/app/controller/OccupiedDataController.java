@@ -26,7 +26,11 @@ import java.util.Random;
 public class OccupiedDataController {
 
     private final OccupiedDataService occupiedDataService;
-
+    @GetMapping(value = "/totalnow", produces = "application/json")
+    public ResponseEntity totalCurrent(){
+        OccupiedData totalD = occupiedDataService.findDataById(-1);
+        return new ResponseEntity(totalD, HttpStatus.OK);
+    }
 
     @GetMapping(value = "/test", produces = "application/json")
     public ResponseEntity testData(){

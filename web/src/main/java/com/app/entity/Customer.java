@@ -31,4 +31,5 @@ public class Customer{
     private String surname;
     private String sex;
     private int age;
+    private boolean inRes;
 }
