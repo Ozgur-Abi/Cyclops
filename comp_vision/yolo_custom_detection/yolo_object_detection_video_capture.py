@@ -14,14 +14,14 @@ classes = ["head"]
 video_path = "restaurant footage.mp4"
 
 # Database connection
-#conn = pymysql.connect(
-#    host='db-mysql-fra1-20737-do-user-12533753-0.b.db.ondigitalocean.com',
-#    port=25060,
-#    user='doadmin',
-#    password='AVNS_TyP_aTfi4c5egU12ZLl',
-#    db='cyclops',
-#    cursorclass=pymysql.cursors.DictCursor
-#)
+conn = pymysql.connect(
+    host='db-mysql-fra1-20737-do-user-12533753-0.b.db.ondigitalocean.com',
+    port=25060,
+    user='doadmin',
+    password='AVNS_TyP_aTfi4c5egU12ZLl',
+    db='cyclops',
+    cursorclass=pymysql.cursors.DictCursor
+)
 
 layer_names = net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
@@ -66,7 +66,6 @@ while cap.isOpened():
             confidence = scores[class_id]
             if confidence > 0.3:
                 # Object detected
-                #print(class_id)
                 center_x = int(detection[0] * width)
                 center_y = int(detection[1] * height)
                 w = int(detection[2] * width)
@@ -85,7 +84,18 @@ while cap.isOpened():
 
     if frame_counter % 1 == 0:
         hourly_people_count = np.append(hourly_people_count, np.array([len(indexes)]))
-        #!!! SEND len(indexes) to backend
+        try:
+            with conn.cursor() as cursor:
+                #!!! SEND len(indexes) to backend
+                sql = "UPDATE occupied_data SET customer_count = %s WHERE data_id = -1"
+                record = (len(indexes))
+                cursor.execute(sql, record)
+
+                # Commit changes
+                conn.commit()
+
+        except(RuntimeError):
+            print("Insertion failed.")
 
     frame_counter += 1
 
@@ -94,17 +104,19 @@ while cap.isOpened():
         print(average_hourly_ppl_count)
         #SAVE average_hourly_ppl_count TO DATABASE
         try:
-            #with conn.cursor() as cursor:
+            with conn.cursor() as cursor:
                 # Create a new record
-            #    day_and_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            #    sql = "INSERT INTO customer_count (customer_count, date) VALUES (%s, %s)"
-            #    record = ((int(average_hourly_ppl_count)), day_and_time)
-            #    cursor.execute(sql, record)
+                day_and_time = int(datetime.datetime.now().strftime('%Y%m%d%H%M'))
+                print(day_and_time)
+                sql = "INSERT INTO occupied_data (customer_count, data_time, table_id) VALUES (%s, %s, %s)"
+                record = ((int(average_hourly_ppl_count)), day_and_time, -1)
+                cursor.execute(sql, record)
 
                 # Commit changes
-            #    conn.commit()
+                conn.commit()
 
                 print("Record inserted successfully")
+
         except(RuntimeError):
             print("Insertion failed.")
 
@@ -118,8 +130,7 @@ while cap.isOpened():
             label = str(classes[class_ids[i]])
             color = colors[class_ids[i]]
             cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
-            #cv2.putText(img, label, (x, y + 30), font, 3, color, 2)
 
 
 cv2.destroyAllWindows()
-#conn.close()
+conn.close()
