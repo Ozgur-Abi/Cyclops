@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Button, Card, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
+import {faEye} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEye} from "@fortawesome/free-solid-svg-icons";
 
 export class Register extends Component {
-
 
     static displayName = Register.name;
     constructor() {
@@ -49,7 +48,6 @@ export class Register extends Component {
                                     </h2>
                                     <div className="mb-3" >
                                         <Form onSubmit={this.handleSubmit}>
-
                                             <Form.Label>Username</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <Form.Control

@@ -20,6 +20,9 @@ export default class App extends Component {
                 <Route >
                     <Route path="/Login" element={<Login />} />
                 </Route>
+                <Route >
+                    <Route path="/Register" element={<Register />} />
+                </Route>
                 <Route element={<Layout/>}>
                     <Route path="/Counter" element={<Counter />} />
                 </Route>
@@ -28,9 +31,6 @@ export default class App extends Component {
                 </Route>
                 <Route element={<Layout/>}>
                     <Route path="/" element={<Home />} />
-                </Route>
-                <Route element={<Layout/>}>
-                    <Route path="/Register" element={<Register />} />
                 </Route>
                 <Route element={<Layout/>}>
                     <Route path="/UserList" element={<UserList />} />
