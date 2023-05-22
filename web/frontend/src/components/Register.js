@@ -41,14 +41,13 @@ export class Register extends Component {
                             <Card.Body>
                                 <div className="mb-3 mt-md-4">
                                     <div className="d-flex justify-content-center align-items-center">
-                                        <FontAwesomeIcon icon={faEye} className="fa-4x "/>
+                                        <FontAwesomeIcon icon={faEye} className="fa-4x"/>
                                     </div>
                                     <h2 className="fw-bold mb-2 text-center ">
                                         CYCLOPS
                                     </h2>
                                     <div className="mb-3" >
                                         <Form onSubmit={this.handleSubmit}>
-
                                             <Form.Label>Username</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <Form.Control
