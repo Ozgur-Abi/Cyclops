@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import {Col, Container, Row} from "react-bootstrap";
+import ListGroup from 'react-bootstrap/ListGroup';
 
 export class UserList extends Component {
   static displayName = UserList.name;
