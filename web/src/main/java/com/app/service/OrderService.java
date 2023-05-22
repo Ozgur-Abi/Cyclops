@@ -16,10 +16,6 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    public void deleteCustomer(int id) {
-        orderRepository.deleteById(id);
-    }
-
     public List<FoodOrder> findAll() {
         return orderRepository.findAll();
     }
