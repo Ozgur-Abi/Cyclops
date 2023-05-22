@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../comp geo project/.idea/comp geo project.iml" filepath="$PROJECT_DIR$/../comp geo project/.idea/comp geo project.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/opencv-face-recognition-python-master.iml" filepath="$PROJECT_DIR$/.idea/opencv-face-recognition-python-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../yolo_custom_detection/.idea/yolo_custom_detection.iml" filepath="$PROJECT_DIR$/../yolo_custom_detection/.idea/yolo_custom_detection.iml" />
     </modules>
   </component>
 </project>
