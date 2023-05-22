@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
 import {Col, Container, Row} from "react-bootstrap";
 
 export class UserList extends Component {
