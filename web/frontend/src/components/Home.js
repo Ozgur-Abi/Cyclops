@@ -1,5 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {Col, Row, Container} from "react-bootstrap";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale, getDefaultLocale } from  "react-datepicker";
+import en from 'date-fns/locale/es';
+registerLocale('en', en)
+
+const DateSelector = () => {
+    const [startDate, setStartDate] = useState(new Date());
+    return (
+        <Container className="d-flex justify-content-center">
+            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+
+        </Container>
+    );
+};
 
 const data = [
     {
@@ -23,6 +39,7 @@ const data = [
         Capacity: 16,
     }
 ];
+
 export class Home extends Component {
     static displayName = Home.name;
 
@@ -47,37 +64,45 @@ export class Home extends Component {
     render() {
         const {countData} = this.state;
         return (
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 mr-100" >
-                        <h2 style={{textAlign:'center'}}>Customer Count</h2>
-                        <h5 style={{textAlign:'center'}}>There are 37
-                            customers in the restaurant right now.
-                        </h5>
-                        <p style={{textAlign:'center'}}>The restaurants maximum capacity is: 52 customers.</p>
-                    </div>
-                    <div class="col-6 m-100">
-                        <BarChart
-                            width={700}
-                            height={500}
-                            data={countData}
-                            margin={{
-                                top: 5,
-                                right: 30,
-                                left: 20,
-                                bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="Capacity" fill="#82ca9d" />
-                        </BarChart>
-                    </div>
-                </div>
-            </div>
+            <Container>
+                <Row>
+                    <Col>
+                        <div>
+                            <h2 style={{textAlign:'center'}}>Customer Count</h2>
+                            <h5 style={{textAlign:'center'}}>There are 37
+                                customers in the restaurant right now.
+                            </h5>
+                            <p style={{textAlign:'center'}}>The restaurants maximum capacity is: 52 customers.</p>
+                        </div>
+                        <div className="d-flex justify-content-center <- doesn't work">
+                            <DatePicker locale="en"/>
+                        </div>
+                        <div className="d-flex justify-content-center">
+                            <BarChart
+                                width={700}
+                                height={500}
+                                data={countData}
+                                margin={{
+                                    top: 5,
+                                    right: 30,
+                                    left: 20,
+                                    bottom: 5,
+                                }}
+                            >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="Capacity" fill="#82ca9d" />
+                            </BarChart>
+                        </div>
+
+                    </Col>
+                </Row>
+
+            </Container>
+
         );
     }
 }
