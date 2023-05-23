@@ -63,20 +63,19 @@ public class OccupiedDataController {
         }
 
         for(OccupiedData od: occupiedDataService.findAll()){
-
             if (od.getId() != -1){
                 LocalDateTime d = LocalDateTime.parse(od.getDataTime().toString(), formatter);
-                System.out.println("text");
-                System.out.println(od.getDataTime());
-                System.out.println(d.getHour());
+
 
                 LocalDateTime finalTime = LocalDateTime.of(year, month, day, now.getHour(), 0);
                 if (d.getDayOfMonth() == finalTime.getDayOfMonth() && d.getMonthValue() == finalTime.getMonthValue() && d.getYear() == finalTime.getYear()){
                     int hour = d.getHour();
-                    counts.set(hour-1, counts.get(hour) + od.getCustomerCount());
+                    System.out.println("text: " + counts.get(11));
+                    System.out.println(od.getDataTime());
+                    System.out.println(d.getHour());
+                    counts.set(hour-1, counts.get(hour-1) + od.getCustomerCount());
                 }
             }
-
         }
 
         return new ResponseEntity(counts, HttpStatus.OK);
