@@ -55,7 +55,7 @@ export class OrderList extends Component {
                           <Card.Subtitle className="my-2">Table ID: {order.tableId}</Card.Subtitle>
                           <Card.Subtitle className="my-2">Order: {order.orderText}</Card.Subtitle>
                           <Button className="my-2" onClick={()=>this.deliverOrder(order.id)} disabled={order.delivered}>
-                              Order is delivered
+                              Mark as Delivered
                           </Button>
                         </Card.Body>
                       </Card>
