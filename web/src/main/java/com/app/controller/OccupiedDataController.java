@@ -81,7 +81,7 @@ public class OccupiedDataController {
                 LocalDateTime finalTime = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), 0);
                 if (d.getDayOfMonth() == finalTime.getDayOfMonth() && d.getMonthValue() == finalTime.getMonthValue() && d.getYear() == finalTime.getYear()){
                     int hour = d.getHour();
-                    counts.set(hour-1, counts.get(hour) + 1);
+                    counts.set(hour-1, counts.get(hour) + od.getCustomerCount());
                 }
             }
 
