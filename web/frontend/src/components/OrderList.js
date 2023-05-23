@@ -48,7 +48,7 @@ export class OrderList extends Component {
               {orderList.map((order,index) => (
                   <ListGroup horizontal>
                     <ListGroup.Item>
-                      <Card style={{ width: '20rem' }} >
+                      <Card style={{ width: '18rem' }} >
                         <Card.Body >
                           <Card.Title className="my-2">Order ID: {order.id}</Card.Title>
                           <Card.Subtitle className="my-2">Customer: {order.customer.name + " " + order.customer.surname}</Card.Subtitle>
