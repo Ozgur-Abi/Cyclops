@@ -9,6 +9,7 @@ import { Register } from "./components/Register";
 import { UserList } from "./components/UserList";
 import { OrderList } from "./components/OrderList";
 import { AddOrder } from "./components/AddOrder";
+import { EditCustomer } from "./components/EditCustomer";
 
 export default class App extends Component {
     static displayName = App.name;
@@ -39,6 +40,9 @@ export default class App extends Component {
                 </Route>
                 <Route element={<Layout/>}>
                     <Route path="/AddOrder" element={<AddOrder />} />
+                </Route>
+                <Route element={<EditCustomer/>}>
+                    <Route path="/EditCustomer/:cId" element={<EditCustomer />}/>
                 </Route>
             </Routes>
         );

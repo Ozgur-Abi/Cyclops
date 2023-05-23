@@ -4,6 +4,7 @@ import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { UserList } from "./components/UserList";
 import { OrderList } from "./components/OrderList";
+import { EditCustomer} from "./components/EditCustomer";
 
 const AppRoutes = [
   {
@@ -37,6 +38,10 @@ const AppRoutes = [
   {
     path: '/orderlist',
     element: <OrderList />
+  },
+  {
+    path: '/editcustomer',
+    element: <EditCustomer />
   }
 
 ];

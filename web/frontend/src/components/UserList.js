@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
-import {Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import ListGroup from 'react-bootstrap/ListGroup';
 
 export class UserList extends Component {
@@ -28,6 +28,11 @@ export class UserList extends Component {
     //return '../../../../comp_vision/opencv-face-recognition-python-master/training-data/s' + (index + 1) +'/image.jpg';
   }
 
+  editCustomer(cid){
+    let link = 'http://localhost:3000/editcustomer/' + cid
+    window.location.href = link
+  }
+
   //MÜŞTERİ RESMİ CARD.IMG'YE EKLENECEK
   render() {
     const {customerList} = this.state;
@@ -42,11 +47,12 @@ export class UserList extends Component {
                             <Card style={{ width: '18rem' }}>
                               <Card.Img variant="top" src={(this.setAddress(index))} />
                                 <Card.Body>
-                                    <Card.Title className="my-2">Customer #{index + 1}</Card.Title>
-                                    <Card.Subtitle className="my-2">Name: {customer.name}</Card.Subtitle>
-                                    <Card.Subtitle className="my-2">Surname: {customer.surname}</Card.Subtitle>
-                                    <Card.Subtitle className="my-2">Sex: {customer.sex}</Card.Subtitle>
-                                    <Card.Subtitle className="my-2">Age: {customer.age}</Card.Subtitle>
+                                  <Card.Title className="my-2">Customer #{index + 1}</Card.Title>
+                                  <Card.Subtitle className="my-2">Name: {customer.name}</Card.Subtitle>
+                                  <Card.Subtitle className="my-2">Surname: {customer.surname}</Card.Subtitle>
+                                  <Card.Subtitle className="my-2">Sex: {customer.sex}</Card.Subtitle>
+                                  <Card.Subtitle className="my-2">Age: {customer.age}</Card.Subtitle>
+                                  <Button onClick={()=> this.editCustomer(index)}>Edit Customer</Button>
                                 </Card.Body>
                             </Card>
                         </ListGroup.Item>
