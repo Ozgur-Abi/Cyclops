@@ -23,6 +23,10 @@ export class UserList extends Component {
     this.setState({customerList: customerArray});
   }
 
+  setAddress(index){
+    return '../assets/images/s' + (index + 1) + '/image.jpg';
+    //return '../../../../comp_vision/opencv-face-recognition-python-master/training-data/s' + (index + 1) +'/image.jpg';
+  }
 
   //MÜŞTERİ RESMİ CARD.IMG'YE EKLENECEK
   render() {
@@ -36,7 +40,7 @@ export class UserList extends Component {
                     <ListGroup horizontal>
                         <ListGroup.Item>
                             <Card style={{ width: '18rem' }}>
-                              <Card.Img variant="top" src="../logo.svg" />
+                              <Card.Img variant="top" src={(this.setAddress(index))} />
                                 <Card.Body>
                                     <Card.Title>Customer #{index + 1}</Card.Title>
                                     <Card.Subtitle>Name: {customer.name}</Card.Subtitle>

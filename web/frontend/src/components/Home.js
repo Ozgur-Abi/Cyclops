@@ -8,7 +8,7 @@ export class Home extends Component {
         countData: [],
 		currentCount: 0,
 		maxCount: 0,
-        date: JSON.stringify(Date()).slice(0,10)
+        date: new Date()
     };
 
 	async componentWillMount() {
@@ -18,28 +18,56 @@ export class Home extends Component {
 	}
 
     async componentDidMount() {
-        const response = await fetch('/api/tabledata/gettodaycount');
-		const response2 = await fetch('/api/tabledata/totalnow');
+        const data = new FormData();
+        data.set('year', this.state.date.getFullYear());
+        data.set('month', this.state.date.getMonth()+1);
+        data.set('day',this.state.date.getDate());
+        const response = await fetch("/api/tabledata/getcount", {
+            method: 'POST',
+            body: data
+        });
+        const response2 = await fetch('/api/tabledata/totalnow');
         const countArray = await response.json();
-		const curData = await response2.json();
+        const curData = await response2.json();
         let cData = [];
-
         for(let i = 0; i < 24; i++){
             cData.push(
                 {
                     name: i + "-" + (i+1),
-                    Capacity: countArray[i]
+                    Average: countArray[i]
                 }
             )
         }
         this.setState({countData: cData, currentCount: curData.customerCount, maxCount: curData.tableId * -1});
     }
 
-    async setDate(chosenDate){
-        this.setState({date: chosenDate})
-        console.log(this.date)
-    }
+    async sendDate(chosenDate){
 
+        //this.setState({date: chosenDate})
+        console.log(chosenDate);
+        const data = new FormData();
+        data.set('year', parseInt(chosenDate.substring(0,4)));
+        data.set('month', parseInt(chosenDate.substring(5,7)));
+        data.set('day', parseInt(chosenDate.substring(8,10)));
+        const response = await fetch("/api/tabledata/getcount", {
+            method: 'POST',
+            body: data
+        });
+        const response2 = await fetch('/api/tabledata/totalnow');
+        const countArray = await response.json();
+        const curData = await response2.json();
+        let cData = [];
+        for(let i = 0; i < 24; i++){
+            cData.push(
+                {
+                    name: i + "-" + (i+1),
+                    Average: countArray[i]
+                }
+            )
+        }
+        this.setState({countData: cData, currentCount: curData.customerCount, maxCount: curData.tableId * -1});
+        console.log(cData);
+    }
 
     render() {
         const {countData, currentCount, maxCount, date} = this.state;
@@ -67,23 +95,25 @@ export class Home extends Component {
                             >
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="name" />
-                                <YAxis />
+                                <YAxis domain={[0, maxCount]}/>
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="Capacity" fill="#82ca9d" />
+                                <Bar dataKey="Average" fill="#82ca9d" />
                             </BarChart>
                         </div>
                     </Col>
                 </Row>
                 <Row>
-                    <Form.Group className="md-12" controlId="chosenDate">
-                        <Form.Control
-                            type="date"
-                            size="sm"
-                            value={this.date}
-                            onChange={(e) => this.setDate(e.target.value)}
-                        />
-                    </Form.Group>
+                    <Form>
+                        <Form.Group className="md-12" controlId="chosenDate">
+                            <Form.Control
+                                type="date"
+                                size="sm"
+                                value={this.date}
+                                onChange={(e) => this.sendDate(e.target.value)}
+                            />
+                        </Form.Group>
+                    </Form>
                 </Row>
             </Container>
         );

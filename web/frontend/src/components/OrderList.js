@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import {Button, Container} from "react-bootstrap";
-import {Form} from "react-bootstrap";
 
 export class OrderList extends Component {
   static displayName = OrderList.name;
@@ -24,16 +23,17 @@ export class OrderList extends Component {
     this.setState({orderList: orderArray});
   }
 
-  async deliverOrder(oid) {
-    const data = oid;
+  async deliverOrder(orderId) {
+    let data = new FormData();
+    data.set('oid', orderId);
 
     fetch('/api/order/deliverorder',{
         method: 'POST',
-        body: {'oid':data}
+        body: data
     }).then(async function(response){
         let text = await response.text();
 
-        if(text ==='success'){
+        if(text ==="success"){
             window.location.href = 'http://localhost:3000/orderlist'
         }
     })
@@ -54,8 +54,9 @@ export class OrderList extends Component {
                           <Card.Subtitle>Customer: {order.customer.name + " " + order.customer.surname}</Card.Subtitle>
                           <Card.Subtitle>Table ID: {order.tableId}</Card.Subtitle>
                           <Card.Subtitle>Order: {order.orderText}</Card.Subtitle>
-                          <Card.Subtitle>Status: {order.delivered}</Card.Subtitle>
-                            <Button onClick={this.deliverOrder(order.id)}>Delivered</Button>
+                          <Button onClick={()=>this.deliverOrder(order.id)} disabled={order.delivered}>
+                              Order is delivered
+                          </Button>
                         </Card.Body>
                       </Card>
                     </ListGroup.Item>
