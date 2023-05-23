@@ -1,55 +1,16 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import {Col, Row, Container} from "react-bootstrap";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale, getDefaultLocale } from  "react-datepicker";
-import en from 'date-fns/locale/es';
-registerLocale('en', en)
-
-const DateSelector = () => {
-    const [startDate, setStartDate] = useState(new Date());
-    return (
-        <Container className="d-flex justify-content-center">
-            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-        </Container>
-    );
-};
-
-
-
-const data = [
-    {
-        name: "9AM - 12AM",
-        Capacity: 21,
-    },
-    {
-        name: "12AM - 3PM",
-        Capacity: 19,
-    },
-    {
-        name: "3PM - 6PM",
-        Capacity: 45,
-    },
-    {
-        name: "6PM - 9PM",
-        Capacity: 37,
-    },
-    {
-        name: "9PM - 12PM",
-        Capacity: 16,
-    }
-];
+import {Col, Row, Container, Form} from "react-bootstrap";
 
 export class Home extends Component {
     static displayName = Home.name;
-
     state = {
         countData: [],
 		currentCount: 0,
-		maxCount: 0
+		maxCount: 0,
+        date: JSON.stringify(Date()).slice(0,10)
     };
-	
+
 	async componentWillMount() {
 		const response = await fetch('/api/getEmail');
 		if (await response.url == "http://localhost:8080/login")
@@ -62,10 +23,7 @@ export class Home extends Component {
         const countArray = await response.json();
 		const curData = await response2.json();
         let cData = [];
-		
-		
-		
-		
+
         for(let i = 0; i < 24; i++){
             cData.push(
                 {
@@ -76,11 +34,17 @@ export class Home extends Component {
         }
         this.setState({countData: cData, currentCount: curData.customerCount, maxCount: curData.tableId * -1});
     }
-    render() {
-        const {countData, currentCount, maxCount} = this.state;
 
+    async setDate(chosenDate){
+        this.setState({date: chosenDate})
+        console.log(this.date)
+    }
+
+
+    render() {
+        const {countData, currentCount, maxCount, date} = this.state;
         return (
-            <Container  className="d-flex justify-content-center align-items-center">
+            <Container  className="d-flex justify-content-center align-items-center mt-md-5">
                 <Row>
                     <Col>
                         <div>
@@ -89,7 +53,6 @@ export class Home extends Component {
                             </h5>
                             <p style={{textAlign:'center'}}>The restaurants maximum capacity is: {maxCount} customers.</p>
                         </div>
-
                         <div className="d-flex justify-content-center">
                             <BarChart
                                 width={700}
@@ -110,14 +73,19 @@ export class Home extends Component {
                                 <Bar dataKey="Capacity" fill="#82ca9d" />
                             </BarChart>
                         </div>
-                        <div>
-                            <DateSelector  locale="en"/>
-                        </div>
                     </Col>
                 </Row>
-
+                <Row>
+                    <Form.Group className="md-12" controlId="chosenDate">
+                        <Form.Control
+                            type="date"
+                            size="sm"
+                            value={this.date}
+                            onChange={(e) => this.setDate(e.target.value)}
+                        />
+                    </Form.Group>
+                </Row>
             </Container>
-
         );
     }
 }
