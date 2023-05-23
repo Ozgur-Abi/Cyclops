@@ -46,7 +46,7 @@ public class OccupiedDataController {
         return new ResponseEntity(datas, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/getcount", produces = "application/json")
+    @PostMapping(value = "/getcount", produces = "application/json")
     public ResponseEntity getTodaysData(@RequestParam int year, @RequestParam int month, @RequestParam int day){
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
