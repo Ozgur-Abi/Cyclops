@@ -25,6 +25,7 @@ export class NavMenu extends Component {
   logout(){
     const response = fetch('/api/logout')
   }
+
   render() {
     return (
         <Navbar bg="dark">
