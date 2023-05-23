@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row, Image} from "react-bootstrap";
 import ListGroup from 'react-bootstrap/ListGroup';
 
 export class UserList extends Component {
@@ -24,8 +24,7 @@ export class UserList extends Component {
   }
 
   setAddress(index){
-    return '../assets/images/s' + (index + 1) + '/image.jpg';
-    //return '../../../../comp_vision/opencv-face-recognition-python-master/training-data/s' + (index + 1) +'/image.jpg';
+    return '../../../../comp_vision/opencv-face-recognition-python-master/training-data/s' + (index + 1) +'/image.jpg';
   }
 
   editCustomer(cid){
@@ -45,7 +44,7 @@ export class UserList extends Component {
                     <ListGroup horizontal>
                         <ListGroup.Item>
                             <Card style={{ width: '18rem' }}>
-                              <Card.Img variant="top" src={(this.setAddress(index))} />
+                              <Card.Img variant="top" src='http://www.clipartbest.com/cliparts/ncE/54X/ncE54XyAi.jpg' />
                                 <Card.Body>
                                   <Card.Title className="my-2">Customer #{index + 1}</Card.Title>
                                   <Card.Subtitle className="my-2">Name: {customer.name}</Card.Subtitle>
