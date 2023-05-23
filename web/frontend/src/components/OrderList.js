@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import {Container} from "react-bootstrap";
+import {Form} from "react-bootstrap";
 
 export class OrderList extends Component {
   static displayName = OrderList.name;
@@ -39,6 +40,12 @@ export class OrderList extends Component {
                           <Card.Subtitle>Customer: {order.customer.name + " " + order.customer.surname}</Card.Subtitle>
                           <Card.Subtitle>Table ID: {order.tableId}</Card.Subtitle>
                           <Card.Subtitle>Order: {order.orderText}</Card.Subtitle>
+                          <Form.Check
+                              type="switch"
+                              id="custom-switch"
+                              label="Order Delivered"
+                              //add backend connection here for order confirmation
+                          />
                         </Card.Body>
                       </Card>
                     </ListGroup.Item>
