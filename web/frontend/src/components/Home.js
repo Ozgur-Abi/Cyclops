@@ -53,10 +53,6 @@ export class Home extends Component {
                             </h5>
                             <p style={{textAlign:'center'}}>The restaurants maximum capacity is: {maxCount} customers.</p>
                         </div>
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
                         <div className="d-flex justify-content-center">
                             <BarChart
                                 width={700}
@@ -77,12 +73,6 @@ export class Home extends Component {
                                 <Bar dataKey="Capacity" fill="#82ca9d" />
                             </BarChart>
                         </div>
-<<<<<<< Updated upstream
-                        <div>
-                            <DateSelector  locale="en"/>
-                        </div>
-=======
->>>>>>> Stashed changes
                     </Col>
                 </Row>
                 <Row>
