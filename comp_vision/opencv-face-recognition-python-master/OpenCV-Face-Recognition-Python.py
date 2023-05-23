@@ -139,6 +139,9 @@ def predict(test_img):
         print("saving image to:", path)
         cv2.imwrite(path, img)
 
+        path = r'../../web/frontend/public/images/' + str(startID) + ".jpg"
+        cv2.imwrite(path, img)
+
         try:
             with conn.cursor() as cursor:
                 # Create a new record
@@ -198,7 +201,7 @@ for dir_name in dirs:
 
 print("Predicting images...")
 
-video_path = r"test-data/ihsan_entering_1.mp4"
+video_path = r"test-data/ihsan_entering_3.mp4"
 face_image = capture_face_frame(video_path)
 
 if face_image is not None:
