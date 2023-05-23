@@ -48,22 +48,38 @@ public class OccupiedDataController {
 
     @GetMapping(value = "/getcount", produces = "application/json")
     public ResponseEntity getTodaysData(@RequestParam int year, @RequestParam int month, @RequestParam int day){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         if (year == -1 && month == -1 && day == -1){
-            LocalDateTime now = LocalDateTime.now();
+
             year = now.getYear();
             month = now.getMonthValue();
             day = now.getDayOfMonth();
         }
 
-        List<OccupiedData> datas = new ArrayList<OccupiedData>();
+        List<Integer> counts = new ArrayList<Integer>();
         for(int i = 0; i < 24; i++){
-            LocalDateTime finalTime = LocalDateTime.of(year, month, day, i, 0);
-            long timeLong = Long.parseLong(dtf.format(finalTime));
-            datas.addAll(occupiedDataService.findDataByTime(timeLong));
+            counts.add(0);
         }
 
-        return new ResponseEntity(datas, HttpStatus.OK);
+        for(OccupiedData od: occupiedDataService.findAll()){
+
+            if (od.getId() != -1){
+                LocalDateTime d = LocalDateTime.parse(od.getDataTime().toString(), formatter);
+                System.out.println("text");
+                System.out.println(od.getDataTime());
+                System.out.println(d.getHour());
+
+                LocalDateTime finalTime = LocalDateTime.of(year, month, day, now.getHour(), 0);
+                if (d.getDayOfMonth() == finalTime.getDayOfMonth() && d.getMonthValue() == finalTime.getMonthValue() && d.getYear() == finalTime.getYear()){
+                    int hour = d.getHour();
+                    counts.set(hour-1, counts.get(hour) + od.getCustomerCount());
+                }
+            }
+
+        }
+
+        return new ResponseEntity(counts, HttpStatus.OK);
     }
 
     @GetMapping(value = "/gettodaycount", produces = "application/json")
