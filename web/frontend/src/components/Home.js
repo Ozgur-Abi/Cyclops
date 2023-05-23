@@ -84,15 +84,12 @@ export class Home extends Component {
                 <Row>
                     <Col>
                         <div>
-                            <h2 style={{textAlign:'center'}}>Customer Count</h2>
+                            <h2 className="mt-md-5 d-flex justify-content-center text-decoration-underline" style={{fontSize:30}} style={{textAlign:'center'}}>Customer Count</h2>
                             <h5 style={{textAlign:'center'}}>There are {currentCount} customers in the restaurant right now.
                             </h5>
                             <p style={{textAlign:'center'}}>The restaurants maximum capacity is: {maxCount} customers.</p>
                         </div>
-                        <div>
-                            <DateSelector  locale="en"/>
-                            
-                        </div>
+
                         <div className="d-flex justify-content-center">
                             <BarChart
                                 width={700}
@@ -113,7 +110,9 @@ export class Home extends Component {
                                 <Bar dataKey="Capacity" fill="#82ca9d" />
                             </BarChart>
                         </div>
-
+                        <div>
+                            <DateSelector  locale="en"/>
+                        </div>
                     </Col>
                 </Row>
 
