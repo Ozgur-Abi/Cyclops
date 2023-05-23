@@ -42,11 +42,11 @@ export class UserList extends Component {
                             <Card style={{ width: '18rem' }}>
                               <Card.Img variant="top" src={(this.setAddress(index))} />
                                 <Card.Body>
-                                    <Card.Title>Customer #{index + 1}</Card.Title>
-                                    <Card.Subtitle>Name: {customer.name}</Card.Subtitle>
-                                    <Card.Subtitle>Surname: {customer.surname}</Card.Subtitle>
-                                    <Card.Subtitle>Sex: {customer.sex}</Card.Subtitle>
-                                    <Card.Subtitle>Age: {customer.age}</Card.Subtitle>
+                                    <Card.Title className="my-2">Customer #{index + 1}</Card.Title>
+                                    <Card.Subtitle className="my-2">Name: {customer.name}</Card.Subtitle>
+                                    <Card.Subtitle className="my-2">Surname: {customer.surname}</Card.Subtitle>
+                                    <Card.Subtitle className="my-2">Sex: {customer.sex}</Card.Subtitle>
+                                    <Card.Subtitle className="my-2">Age: {customer.age}</Card.Subtitle>
                                 </Card.Body>
                             </Card>
                         </ListGroup.Item>

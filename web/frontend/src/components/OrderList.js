@@ -50,11 +50,11 @@ export class OrderList extends Component {
                     <ListGroup.Item>
                       <Card style={{ width: '18rem' }} >
                         <Card.Body >
-                          <Card.Title>Order ID: {order.id}</Card.Title>
-                          <Card.Subtitle>Customer: {order.customer.name + " " + order.customer.surname}</Card.Subtitle>
-                          <Card.Subtitle>Table ID: {order.tableId}</Card.Subtitle>
-                          <Card.Subtitle>Order: {order.orderText}</Card.Subtitle>
-                          <Button onClick={()=>this.deliverOrder(order.id)} disabled={order.delivered}>
+                          <Card.Title className="my-2">Order ID: {order.id}</Card.Title>
+                          <Card.Subtitle className="my-2">Customer: {order.customer.name + " " + order.customer.surname}</Card.Subtitle>
+                          <Card.Subtitle className="my-2">Table ID: {order.tableId}</Card.Subtitle>
+                          <Card.Subtitle className="my-2">Order: {order.orderText}</Card.Subtitle>
+                          <Button className="my-2" onClick={()=>this.deliverOrder(order.id)} disabled={order.delivered}>
                               Order is delivered
                           </Button>
                         </Card.Body>
