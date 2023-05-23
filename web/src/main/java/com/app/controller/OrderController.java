@@ -3,6 +3,7 @@ package com.app.controller;
 import com.app.entity.Customer;
 import com.app.entity.FoodOrder;
 import com.app.entity.OccupiedData;
+import com.app.entity.User;
 import com.app.repository.CustomerRepository;
 import com.app.repository.OrderRepository;
 import com.app.service.CustomerService;
@@ -13,10 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -59,4 +58,33 @@ public class OrderController {
 
         return new ResponseEntity("success", HttpStatus.OK);
     }
+
+    @PostMapping(value = "/addorder")
+    @ResponseBody
+    public String addOrder(@RequestParam int cid, @RequestParam int tid, @RequestParam String order,
+                               Model model) throws Exception {
+
+        FoodOrder newOrder = new FoodOrder();
+        newOrder.setOrderText(order);
+        newOrder.setCustomer(customerRepository.getById(cid));
+        newOrder.setTableId(tid);
+        newOrder.setDelivered(false);
+
+        orderRepository.save(newOrder);
+        return "success";
+    }
+
+    @PostMapping(value = "/deliverorder")
+    @ResponseBody
+    public String deliverOrder(@RequestParam int oid,
+                           Model model) throws Exception {
+
+        FoodOrder order = orderService.findDataById(oid);
+
+        order.setDelivered(true);
+        orderRepository.save(order);
+        return "success";
+    }
+
+
 }
