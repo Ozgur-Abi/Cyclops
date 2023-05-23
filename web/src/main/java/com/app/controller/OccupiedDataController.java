@@ -46,13 +46,19 @@ public class OccupiedDataController {
         return new ResponseEntity(datas, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/gettoday", produces = "application/json")
-    public ResponseEntity getTodaysData(){
+    @GetMapping(value = "/getcount", produces = "application/json")
+    public ResponseEntity getTodaysData(@RequestParam int year, @RequestParam int month, @RequestParam int day){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-        LocalDateTime now = LocalDateTime.now();
+        if (year == -1 && month == -1 && day == -1){
+            LocalDateTime now = LocalDateTime.now();
+            year = now.getYear();
+            month = now.getMonthValue();
+            day = now.getDayOfMonth();
+        }
+
         List<OccupiedData> datas = new ArrayList<OccupiedData>();
         for(int i = 0; i < 24; i++){
-            LocalDateTime finalTime = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), i, 0);
+            LocalDateTime finalTime = LocalDateTime.of(year, month, day, i, 0);
             long timeLong = Long.parseLong(dtf.format(finalTime));
             datas.addAll(occupiedDataService.findDataByTime(timeLong));
         }
