@@ -12,7 +12,6 @@ const DateSelector = () => {
     return (
         <Container className="d-flex justify-content-center">
             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-
         </Container>
     );
 };
@@ -79,8 +78,9 @@ export class Home extends Component {
     }
     render() {
         const {countData, currentCount, maxCount} = this.state;
+
         return (
-            <Container>
+            <Container  className="d-flex justify-content-center align-items-center">
                 <Row>
                     <Col>
                         <div>
@@ -89,8 +89,9 @@ export class Home extends Component {
                             </h5>
                             <p style={{textAlign:'center'}}>The restaurants maximum capacity is: {maxCount} customers.</p>
                         </div>
-                        <div className="d-flex justify-content-center <- doesn't work">
-                            <DatePicker locale="en"/>
+                        <div>
+                            <DateSelector  locale="en"/>
+                            
                         </div>
                         <div className="d-flex justify-content-center">
                             <BarChart
