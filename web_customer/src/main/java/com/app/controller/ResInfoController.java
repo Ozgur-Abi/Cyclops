@@ -37,15 +37,4 @@ public class ResInfoController {
         return new ResponseEntity(resInfo, HttpStatus.OK);
     }
 
-    @PostMapping("/createRandom")
-    public void createRandom(){
-        ResInfo resInfo = new ResInfo();
-        resInfo.setAddress("Bahçelievler, Ayçiçeği Sk. No:2, 34688 Üsküdar/İstanbul");
-        resInfo.setTelephone("05313313131");
-        resInfo.setRestaurantName("Dolak Restaurant");
-        resInfo.setCurrentCustomerCount(31);
-        resInfo.setOpen(true);
-        rInfoRepo.save(resInfo);
-    }
-
 }
