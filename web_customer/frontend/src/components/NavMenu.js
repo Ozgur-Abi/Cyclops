@@ -16,6 +16,10 @@ export class NavMenu extends Component {
     };
   }
 
+  logout(){
+    const response = fetch('/api/logout')
+  }
+
   toggleNavbar () {
     this.setState({
       collapsed: !this.state.collapsed
@@ -34,7 +38,7 @@ export class NavMenu extends Component {
             </Nav.Item>
           </Nav>
           <Nav className="ms-auto">
-            <Nav.Link href="/logout" className="text-white mx-3">Logout</Nav.Link>
+            <Nav.Link href='/login' className="text-white mx-3" onClick={this.logout}>Logout</Nav.Link>
           </Nav>
         </Navbar>
     );
