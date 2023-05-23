@@ -44,7 +44,7 @@ export class UserList extends Component {
                     <ListGroup horizontal>
                         <ListGroup.Item>
                             <Card style={{ width: '18rem' }}>
-                              <Card.Img variant="top" src='http://www.clipartbest.com/cliparts/ncE/54X/ncE54XyAi.jpg' />
+                              <Card.Img variant="top" src='images/asd.jpg' />
                                 <Card.Body>
                                   <Card.Title className="my-2">Customer #{index + 1}</Card.Title>
                                   <Card.Subtitle className="my-2">Name: {customer.name}</Card.Subtitle>
