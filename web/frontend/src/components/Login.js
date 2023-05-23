@@ -28,6 +28,12 @@ export class Login extends Component {
 
         });
     }
+	
+	async componentWillMount() {
+		const response = await fetch('/api/getEmail');
+		if (await response.url != "http://localhost:8080/login")
+			window.location.href = 'http://localhost:3000/home'
+	}
 
     render() {
         return (
