@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
-import {Container} from "react-bootstrap";
+import {Button, Container} from "react-bootstrap";
 import {Form} from "react-bootstrap";
 
 export class OrderList extends Component {
@@ -24,6 +24,20 @@ export class OrderList extends Component {
     this.setState({orderList: orderArray});
   }
 
+  async deliverOrder(oid) {
+    const data = oid;
+
+    fetch('/api/order/deliverorder',{
+        method: 'POST',
+        body: {'oid':data}
+    }).then(async function(response){
+        let text = await response.text();
+
+        if(text ==='success'){
+            window.location.href = 'http://localhost:3000/orderlist'
+        }
+    })
+  }
   render() {
     const {orderList} = this.state;
     return (
@@ -40,12 +54,8 @@ export class OrderList extends Component {
                           <Card.Subtitle>Customer: {order.customer.name + " " + order.customer.surname}</Card.Subtitle>
                           <Card.Subtitle>Table ID: {order.tableId}</Card.Subtitle>
                           <Card.Subtitle>Order: {order.orderText}</Card.Subtitle>
-                          <Form.Check
-                              type="switch"
-                              id="custom-switch"
-                              label="Order Delivered"
-                              //add backend connection here for order confirmation
-                          />
+                          <Card.Subtitle>Status: {order.delivered}</Card.Subtitle>
+                            <Button onClick={this.deliverOrder(order.id)}>Delivered</Button>
                         </Card.Body>
                       </Card>
                     </ListGroup.Item>

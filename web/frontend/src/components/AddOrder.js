@@ -16,12 +16,12 @@ export class AddOrder extends Component {
 
         fetch("/api/order/addorder", {
             method: 'POST',
-            body: data,
+            body: data
         }).then(async function(response) {
             let text = await response.text();
 
             if(text === 'success')
-                window.location.href = 'http://localhost:3000/orders'
+                window.location.href = 'http://localhost:3000/orderlist'
         })
     }
 
