@@ -23,6 +23,15 @@ conn = pymysql.connect(
     cursorclass=pymysql.cursors.DictCursor
 )
 
+conn2 = pymysql.connect(
+    host='db-mysql-fra1-20737-do-user-12533753-0.b.db.ondigitalocean.com',
+    port=25060,
+    user='doadmin',
+    password='AVNS_TyP_aTfi4c5egU12ZLl',
+    db='cyclopscustomer',
+    cursorclass=pymysql.cursors.DictCursor
+)
+
 layer_names = net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
 colors = np.random.uniform(0, 255, size=(len(classes), 3))
@@ -95,7 +104,20 @@ while cap.isOpened():
                 conn.commit()
 
         except(RuntimeError):
-            print("Insertion failed.")
+            print("Insertion into cyclops failed.")
+
+        try:
+            with conn2.cursor() as cursor:
+                #!!! SEND len(indexes) to backend
+                sql = "UPDATE res_info SET current_customer_count = %s WHERE id = 1"
+                record = (len(indexes))
+                cursor.execute(sql, record)
+
+                # Commit changes
+                conn2.commit()
+
+        except(RuntimeError):
+            print("Insertion into cyclopscustomer failed.")
 
     frame_counter += 1
 
