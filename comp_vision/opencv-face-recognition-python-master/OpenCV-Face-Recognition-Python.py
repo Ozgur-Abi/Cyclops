@@ -139,8 +139,11 @@ def predict(test_img):
         print("saving image to:", path)
         cv2.imwrite(path, img)
 
+        # resize image
+        resized_img = cv2.resize(img, (580, 680), interpolation = cv2.INTER_AREA)
+
         path = r'../../web/frontend/public/images/' + str(startID) + ".jpg"
-        cv2.imwrite(path, img)
+        cv2.imwrite(path, resized_img)
 
         try:
             with conn.cursor() as cursor:
@@ -173,16 +176,8 @@ print("Data prepared")
 print("Total faces: ", len(faces))
 print("Total labels: ", len(labels))
 
-
 #create our LBPH face recognizer
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
-
-#or use EigenFaceRecognizer by replacing above line with
-#face_recognizer = cv2.face.EigenFaceRecognizer_create()
-
-#or use FisherFaceRecognizer by replacing above line with
-#face_recognizer = cv2.face.FisherFaceRecognizer_create()
-
 
 #train our face recognizer of our training faces
 face_recognizer.train(faces, np.array(labels))
@@ -201,7 +196,7 @@ for dir_name in dirs:
 
 print("Predicting images...")
 
-video_path = r"test-data/ihsan_entering_3.mp4"
+video_path = r"test-data/ihsan_entering_1.mp4"
 face_image = capture_face_frame(video_path)
 
 if face_image is not None:
