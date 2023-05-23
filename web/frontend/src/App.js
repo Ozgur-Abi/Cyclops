@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AppRoutes from './AppRoutes';
 import { Layout } from './components/Layout';
 import './custom.css';
 import { Counter } from "./components/Counter";
@@ -9,6 +8,7 @@ import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { UserList } from "./components/UserList";
 import { OrderList } from "./components/OrderList";
+import { AddOrder } from "./components/AddOrder";
 
 export default class App extends Component {
     static displayName = App.name;
@@ -36,6 +36,9 @@ export default class App extends Component {
                 </Route>
                 <Route element={<Layout/>}>
                     <Route path="/OrderList" element={<OrderList />} />
+                </Route>
+                <Route element={<Layout/>}>
+                    <Route path="/AddOrder" element={<AddOrder />} />
                 </Route>
             </Routes>
         );

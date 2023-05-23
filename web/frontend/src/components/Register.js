@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export class Register extends Component {
 
-    static displayName = Register.name; fro
+    static displayName = Register.name;
     constructor() {
         super();
         this.state = {emailStatus : false};

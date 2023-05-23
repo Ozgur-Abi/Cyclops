@@ -6,8 +6,6 @@ import ListGroup from 'react-bootstrap/ListGroup';
 export class UserList extends Component {
   static displayName = UserList.name;
 
-  columnsPerRow = 4;
-
   state = {
     customerList: []
   };
@@ -19,14 +17,14 @@ export class UserList extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch('/customer/all');
+    const response = await fetch('api/customer/all');
     const customerArray = await response.json();
     console.log(customerArray);
     this.setState({customerList: customerArray});
   }
 
 
-
+  //MÜŞTERİ RESMİ CARD.IMG'YE EKLENECEK
   render() {
     const {customerList} = this.state;
     return (
@@ -38,6 +36,7 @@ export class UserList extends Component {
                     <ListGroup horizontal>
                         <ListGroup.Item>
                             <Card style={{ width: '18rem' }}>
+                              <Card.Img variant="top" src="../logo.svg" />
                                 <Card.Body>
                                     <Card.Title>Customer #{index + 1}</Card.Title>
                                     <Card.Subtitle>Name: {customer.name}</Card.Subtitle>
