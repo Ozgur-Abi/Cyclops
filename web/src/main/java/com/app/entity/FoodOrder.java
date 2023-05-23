@@ -21,4 +21,5 @@ public class FoodOrder{
     private Customer customer;
     private int tableId;
     private String orderText;
+    private boolean delivered;
 }
