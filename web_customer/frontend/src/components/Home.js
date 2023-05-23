@@ -14,7 +14,7 @@ export class Home extends Component {
 
   async componentWillMount() {
       const response = await fetch('/api/getEmail');
-      if (await response.url.toString().includes("/login"))
+      if (await response.url.toString().includes("login"))
           window.location.href = '/login'
   }
 
@@ -35,7 +35,7 @@ export class Home extends Component {
                 <ListGroup horizontal className="d-flex justify-content-center">
                     <ListGroup.Item>
                         <Card style={{ width: '28rem'}} >
-                            <a class="btn btn-primary" href = {"/restaurant/" + restaurant.restaurantNo}>{restaurant.restaurantNo + ": " + restaurant.restaurantName}</a>
+                            <a class="btn btn-primary" href = {"/restaurant/" + restaurant.restaurantNo}>{restaurant.restaurantName}</a>
                         </Card>
                     </ListGroup.Item>
                 </ListGroup>
