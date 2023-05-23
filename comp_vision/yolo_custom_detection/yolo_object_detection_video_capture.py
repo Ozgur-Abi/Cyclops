@@ -108,8 +108,8 @@ while cap.isOpened():
                 # Create a new record
                 day_and_time = int(datetime.datetime.now().strftime('%Y%m%d%H%M'))
                 print(day_and_time)
-                sql = "INSERT INTO occupied_data (customer_count, data_time, table_id) VALUES (%s, %s, %s)"
-                record = ((int(average_hourly_ppl_count)), day_and_time, -1)
+                sql = "INSERT INTO occupied_data (customer_id, customer_count, data_time, table_id) VALUES (%s, %s, %s, %s)"
+                record = (0, (int(average_hourly_ppl_count)), day_and_time, -1)
                 cursor.execute(sql, record)
 
                 # Commit changes
