@@ -196,7 +196,7 @@ for dir_name in dirs:
 
 print("Predicting images...")
 
-video_path = r"test-data/ihsan_entering_1.mp4"
+video_path = r"test-data/osman_entering_1.mp4"
 face_image = capture_face_frame(video_path)
 
 if face_image is not None:

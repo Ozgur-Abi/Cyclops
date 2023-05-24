@@ -37,7 +37,7 @@ export class UserList extends Component {
     const {customerList} = this.state;
     return (
         <div>
-          <h2 className="mt-md-5 d-flex justify-content-center text-decoration-underline" style={{fontSize:30}}> Today's Customers</h2>
+          <h2 className="mt-md-5 d-flex justify-content-center text-decoration-underline" style={{fontSize:30}}>Customers</h2>
           <Container>
             <Row xs={1} md={4} className="g-4 mt-md-1">
                 {customerList.map((customer,index) => (
@@ -51,6 +51,7 @@ export class UserList extends Component {
                                   <Card.Subtitle className="my-2">Surname: {customer.surname}</Card.Subtitle>
                                   <Card.Subtitle className="my-2">Sex: {customer.sex}</Card.Subtitle>
                                   <Card.Subtitle className="my-2">Age: {customer.age}</Card.Subtitle>
+                                  <Card.Subtitle className="my-2">Is in restaurant: {'' + customer.inRes}</Card.Subtitle>
                                   <Button onClick={()=> this.editCustomer(index)}>Edit Customer</Button>
                                 </Card.Body>
                             </Card>

@@ -121,7 +121,7 @@ while cap.isOpened():
 
     frame_counter += 1
 
-    if frame_counter == 6:
+    if frame_counter == 15:
         average_hourly_ppl_count = int(np.average(hourly_people_count))
         print(average_hourly_ppl_count)
         #SAVE average_hourly_ppl_count TO DATABASE
@@ -153,6 +153,8 @@ while cap.isOpened():
             color = colors[class_ids[i]]
             cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
 
+    #cv2.imshow("Image", img)
+    #key = cv2.waitKey(0)
 
 cv2.destroyAllWindows()
 conn.close()
