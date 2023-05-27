@@ -5,8 +5,8 @@
 <p><a href="2332_DetailedDesignReport.pdf">Detailed Design Report</a></p>
 <p><a href="2332_FinalReport.pdf">Final Report</a></p>
 <p><a href="T2332 Cyclops - Final Presentation.pptx">Final Presentation</a></p>
-<p></p>
-<p></p>
+<br>
+<br>
 <p>Reports and Presentation - Previous Semester</p>
 <p><a href="T2332_Analysis_Requirements_Report.pdf">Analysis Requirement Report</a></p>
 <p><a href="T2332_Project_Specification_Document.pdf">Project Specification Report</a></p>
