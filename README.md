@@ -6,6 +6,13 @@
 <a href="T2332_Project_Specification_Document.pdf">Project Specification Report</a>
 <a href="Cyclops_Demo_Presentation.pptx">Demo Presentation</a>
 
+<h2> CS 492 Senior Design Project I - <Spring 2023 </h2>
+
+<p>Reports and Presentation - Latest</p>
+<a href="2332_DetailedDesignReport.pdf">Detailed Design Report</a>
+<a href="2332_FinalReport.pdf">Final Report</a>
+<a href="T2332 Cyclops - Final Presentation.pptx">Final Presentation</a>
+
 <h2> Project Team Members </h2>
 <p>Ali Doğaç Urkaya - 21903213</p>
 <p>Özgür Abi - 21902358</p>
@@ -16,3 +23,6 @@
 
 <h2> Project Description </h2>
 <p> We plan on counting and analyzing the customers in a restaurant. The program will gather data on the fullness of the restaurant, which tables are preferred by customers, age and gender analysis of the customers etc. through the camera feed. This data will be used by the restaurant owners to optimize their restaurants and give promotions or rearrange prices to increase their profits and customer experiences. </p>
+
+<p> There are 2 seperate apps for restaurant owners and customers. The main functionalities are designed for restaurant owners. </p>
+<p> The app for customers is running on: http://104.248.26.143:3000/</p>
