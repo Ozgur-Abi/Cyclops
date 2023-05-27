@@ -2,14 +2,15 @@
 <h2> CS 492 Senior Design Project I - <Spring 2023 </h2>
 
 <p>Reports and Presentation - Latest</p>
-<a href="2332_DetailedDesignReport.pdf">Detailed Design Report</a>
-<a href="2332_FinalReport.pdf">Final Report</a>
-<a href="T2332 Cyclops - Final Presentation.pptx">Final Presentation</a>
-  
+<p><a href="2332_DetailedDesignReport.pdf">Detailed Design Report</a></p>
+<p><a href="2332_FinalReport.pdf">Final Report</a></p>
+<p><a href="T2332 Cyclops - Final Presentation.pptx">Final Presentation</a></p>
+<p></p>
+<p></p>
 <p>Reports and Presentation - Previous Semester</p>
-<a href="T2332_Analysis_Requirements_Report.pdf">Analysis Requirement Report</a>
-<a href="T2332_Project_Specification_Document.pdf">Project Specification Report</a>
-<a href="Cyclops_Demo_Presentation.pptx">Demo Presentation</a>
+<p><a href="T2332_Analysis_Requirements_Report.pdf">Analysis Requirement Report</a></p>
+<p><a href="T2332_Project_Specification_Document.pdf">Project Specification Report</a></p>
+<p><a href="Cyclops_Demo_Presentation.pptx">Demo Presentation</a></p>
 
 <h2> Project Team Members </h2>
 <p>Ali Doğaç Urkaya - 21903213</p>
