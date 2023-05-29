@@ -1,89 +1,84 @@
-import React, {Component} from "react";
-import {Button, Card, Col, Container, Form, InputGroup, Row} from "react-bootstrap"
+import React, { useState } from "react";
+import { Button, Form, InputGroup, Modal, Spinner } from "react-bootstrap";
 
-export class EditCustomer extends Component{
+function EditCustomer({ show, handleClose, customer }) {
+  const [loading, setLoading] = useState(false);
 
-    customerId = parseInt(window.location.href.split('/')[4]) + 1
-    constructor(){
-        super();
-        this.editCustomer = this.editCustomer.bind(this);
+  const editCustomer = async (event) => {
+    setLoading(true);
+    event.preventDefault();
+    const data = new FormData(event.target);
+    data.set("cid", customer.id);
+
+    const response = await fetch("/api/customer/editcustomer", {
+      method: "POST",
+      body: data,
+    });
+    let text = await response.text();
+
+    if (text === "success") {
+      setLoading(false);
+      handleClose();
     }
-    async editCustomer(event){
-        event.preventDefault();
-        const data = new FormData(event.target);
-        data.set('cid', this.customerId);
+  };
 
-        fetch("/api/customer/editcustomer", {
-            method: 'POST',
-            body: data
-        }).then(async function(response) {
-            let text = await response.text();
-
-            if(text === 'success')
-                window.location.href = 'http://localhost:3000/userlist'
-        })
-    }
-
-    render(){
-        return(
-            <Container>
-                <Row className="vh-100 d-flex justify-content-center align-items-center">
-                    <Col md={8} lg={6} xs={12}>
-                        <Card class="px-4">
-                            <Card.Body>
-                                <div className="mb-3 mt-md-4">
-                                    <h2 className="fw-bold mb-2 text-center ">
-                                        Edit customer
-                                    </h2>
-                                    <div className="mb-3" >
-                                        <Form onSubmit={this.editCustomer}>
-                                            <div>
-                                                <Form.Label>Customer ID: {this.customerId}</Form.Label>
-                                            </div>
-                                            <Form.Label>Age</Form.Label>
-                                            <InputGroup className="mb-3">
-                                                <Form.Control
-                                                    type="number"
-                                                    id="age"
-                                                    name="age"
-                                                    placeholder="Age"
-                                                />
-                                            </InputGroup>
-                                            <Form.Label>Sex</Form.Label>
-                                            <InputGroup className="mb-3">
-                                                <Form.Control
-                                                    id="sex"
-                                                    name="sex"
-                                                    placeholder="Sex"
-                                                />
-                                            </InputGroup>
-                                            <Form.Label>Name</Form.Label>
-                                            <InputGroup className="mb-3">
-                                                <Form.Control
-                                                    id="name"
-                                                    name="name"
-                                                    placeholder="Name"
-                                                />
-                                            </InputGroup>
-                                            <Form.Label>Surname</Form.Label>
-                                            <InputGroup className="mb-3">
-                                                <Form.Control
-                                                    id="surname"
-                                                    name="surname"
-                                                    placeholder="Surname"
-                                                />
-                                            </InputGroup>
-                                            <div className="d-flex justify-content-center align-items-center">
-                                                <Button type="submit">Submit</Button>
-                                            </div>
-                                        </Form>
-                                    </div>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
-        );
-    }
+  return (
+    <Modal centered show={show} onHide={handleClose}>
+      <Form onSubmit={editCustomer}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Customer</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Label>Age</Form.Label>
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="number"
+              id="age"
+              name="age"
+              placeholder="Age"
+              defaultValue={customer?.age || ""}
+            />
+          </InputGroup>
+          <Form.Label>Sex</Form.Label>
+          <InputGroup className="mb-3">
+            <Form.Control
+              id="sex"
+              name="sex"
+              placeholder="Sex"
+              defaultValue={customer?.sex || ""}
+            />
+          </InputGroup>
+          <Form.Label>Name</Form.Label>
+          <InputGroup className="mb-3">
+            <Form.Control
+              id="name"
+              name="name"
+              placeholder="Name"
+              defaultValue={customer?.name || ""}
+            />
+          </InputGroup>
+          <Form.Label>Surname</Form.Label>
+          <InputGroup className="mb-3">
+            <Form.Control
+              id="surname"
+              name="surname"
+              placeholder="Surname"
+              defaultValue={customer?.surname || ""}
+            />
+          </InputGroup>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="light" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="dark" type="submit" disabled={loading}>
+            Save Changes{" "}
+            {loading && <Spinner animation="border" as="span" size="sm" role="status" aria-hidden="true" />}
+          </Button>
+        </Modal.Footer>
+      </Form>
+    </Modal>
+  );
 }
+
+export { EditCustomer };

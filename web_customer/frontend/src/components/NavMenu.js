@@ -31,14 +31,14 @@ export class NavMenu extends Component {
         <Navbar bg="dark">
           <Nav className="justify-content-start">
             <Nav.Item className="d-flex align-items-center justify-content-center mx-3" >
-              <FontAwesomeIcon icon={faEye} style={{color: "#ffffff",}} className="fa-2x" />
+              <FontAwesomeIcon icon={faEye} style={{color: "#e4e4e4",}} className="fa-2x" />
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/home" className="text-white mx-3">Home</Nav.Link>
+              <Nav.Link href="/home" className="gray mx-3">Home</Nav.Link>
             </Nav.Item>
           </Nav>
           <Nav className="ms-auto">
-            <Nav.Link href='/login' className="text-white mx-3" onClick={this.logout}>Logout</Nav.Link>
+            <Nav.Link href='/login' className="gray mx-3" onClick={this.logout}>Logout</Nav.Link>
           </Nav>
         </Navbar>
     );

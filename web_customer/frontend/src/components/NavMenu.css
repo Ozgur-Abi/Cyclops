@@ -1,3 +1,7 @@
-﻿.text-white:hover{
-  transform: scale(1.25)
+﻿.gray:hover{
+  color: white;
+}
+
+.gray:active {
+  color: white;
 }

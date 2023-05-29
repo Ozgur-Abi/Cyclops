@@ -1,4 +1,14 @@
 /* Provide sufficient contrast against white background */
+*::selection {
+  color: white;
+  background-color: black;
+}
+
+body {
+  background-color: #e4e4e4;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 a {
   color: #0366d6;
 }
@@ -15,4 +25,26 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+
+.link {
+  color: black
+}
+
+.link:hover {
+  color: #515157
+}
+
+.card {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  height: 100%;
+}
+
+.gray {
+  color: #e4e4e4;
+}
+
+.shadowed-btn{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
