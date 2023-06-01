@@ -25,12 +25,12 @@ function Login() {
       body: data,
     });
     console.log(await response);
-    if (response.url.toString().includes("/login")) {
+    if (response.url.toString().includes("/login") && !response.url.toString().includes("/login-error")) {
       setLoading(false);
 
       window.location.href = "/home";
     } else {
-      //show error message
+      setLoading(false);
     }
   };
 

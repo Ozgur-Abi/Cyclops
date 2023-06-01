@@ -58,7 +58,7 @@ function Home() {
                   </Card.Subtitle>
 
                   <Card.Subtitle className="my-2">
-                    Restaurant Capacity: {restaurant.maxCount}
+                    Restaurant Capacity: {restaurant.maxCustomerCount}
                   </Card.Subtitle>
 
                   <Card.Subtitle className="my-2">
@@ -74,7 +74,7 @@ function Home() {
                   </Card.Subtitle>
 
                   <div className="progressBar">
-                    <ProgressBar striped variant="secondary" now={restaurant.currentCustomerCount/restaurant.maxCount} animated/>
+                    <ProgressBar striped variant="secondary" now={restaurant.currentCustomerCount/restaurant.maxCustomerCount * 100} animated/>
                   </div>
 
                 </Card.Body>
