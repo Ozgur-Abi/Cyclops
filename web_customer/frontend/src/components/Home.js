@@ -3,10 +3,10 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Container } from "react-bootstrap";
+import { ProgressBar } from 'react-bootstrap';
 
 function Home() {
   const [restaurantList, setRestaurantList] = useState([]);
-
   useEffect(() => {
     const getEmail = async () => {
       const response = await fetch("/api/getEmail");
@@ -17,6 +17,7 @@ function Home() {
 
     getEmail();
   }, []);
+
 
   useEffect(() => {
     const getRestaurantList = async () => {
@@ -57,6 +58,10 @@ function Home() {
                   </Card.Subtitle>
 
                   <Card.Subtitle className="my-2">
+                    Restaurant Capacity: {restaurant.maxCount}
+                  </Card.Subtitle>
+
+                  <Card.Subtitle className="my-2">
                     Address: {restaurant.address}
                   </Card.Subtitle>
                   <Card.Subtitle className="my-2">
@@ -67,6 +72,11 @@ function Home() {
                       ? "Restaurant is currently open."
                       : "Restaurant is currently closed."}
                   </Card.Subtitle>
+
+                  <div className="progressBar">
+                    <ProgressBar striped variant="secondary" now={restaurant.currentCustomerCount/restaurant.maxCount} animated/>
+                  </div>
+
                 </Card.Body>
               </Card>
             </ListGroup>
